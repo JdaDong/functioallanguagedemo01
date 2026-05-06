@@ -1,9 +1,122 @@
+# ============================================================
+# 通用 / OS / 编辑器
+# ============================================================
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+*.log
+*.pid
+
+# ============================================================
+# 编辑器 / IDE / 语言服务器（全局）
+# ============================================================
 .bsp
 .idea
-.metals
 .vscode
+.metals
+.bloop
+.ammonite
 .scala-build
-haskell/*.hi
+.elixir_ls
+.lexical
+.next_ls
+
+# ============================================================
+# Scala —— 源码根在 scala/，akka 子目录共享
+# ============================================================
 scala/*.class
 scala/.bsp
 scala/.scala-build
+scala/.bloop
+scala/.metals
+scala/.ammonite
+scala/target/
+scala/project/target/
+scala/project/project/
+scala/akka/target/
+
+# ============================================================
+# Haskell —— 当前以 runghc 单文件运行，GHC 会产生 .hi / .o 等中间产物
+# ============================================================
+haskell/*.hi
+haskell/*.o
+haskell/*.dyn_hi
+haskell/*.dyn_o
+haskell/*.hie
+haskell/*.prof
+haskell/*.eventlog
+# cabal / stack 工程产物（如果后续改用 cabal/stack）
+haskell/dist/
+haskell/dist-newstyle/
+haskell/.stack-work/
+haskell/.cabal-sandbox/
+haskell/cabal.sandbox.config
+
+# ============================================================
+# Rust —— 当前以 rustc 单文件编译，未来可能切到 Cargo
+# ============================================================
+rust/target/
+rust/Cargo.lock
+rust/*.o
+rust/*.rlib
+rust/*.rmeta
+rust/*.pdb
+# rustc 单文件编译产出的可执行文件（没有扩展名，按名字列出）
+rust/demo
+
+# ============================================================
+# Erlang —— BEAM 家族，编译产物通用
+# ============================================================
+erlang/*.beam
+erlang/ebin/
+erlang/_build/
+
+# ============================================================
+# Elixir / Mix / BEAM —— Demo 09~15 通过 Mix.install 在本地缓存 hex 依赖
+# ============================================================
+elixir/_build/
+elixir/deps/
+elixir/.elixir_ls/
+elixir/.lexical/
+elixir/.next_ls/
+elixir/.fetch
+elixir/cover/
+elixir/*.coverdata
+elixir/.coveralls.*
+elixir/doc/
+elixir/erl_crash.dump
+elixir/*.beam
+elixir/*.ez
+elixir/.formatter.exs.bak
+
+# Mix.install 把依赖缓存放到 $MIX_INSTALL_DIR（通常在 ~/.mix/installs 或 .elixir_ls）
+# 有些用户会把 install 缓存软链到项目下的 .mix/，一并忽略
+elixir/.mix/
+elixir/.hex/
+elixir/.rebar3/
+elixir/.iex.exs.local
+
+# Mix.install 在某些版本 / 某些 MIX_INSTALL_DIR 设置下会把依赖缓存
+# 直接写到当前工作目录下的 .deps/ 而不是 _build/
+elixir/.deps/
+
+# Phoenix / LiveView / Ecto（Demo 10/11 运行时可能产生）
+elixir/priv/
+elixir/tmp/
+elixir/.phx.*
+elixir/assets/node_modules/
+elixir/priv/static/assets/
+
+# Dialyzer / Gradient 静态类型检查缓存
+elixir/.dialyzer_plt*
+elixir/priv/plts/
+
+# ============================================================
+# 根级兜底：BEAM crash dump / 依赖缓存（无论在哪个目录触发都可能落到根）
+# ============================================================
+erl_crash.dump
+.mix/
+.hex/
+.rebar3/

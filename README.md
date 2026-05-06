@@ -2,7 +2,7 @@
 
 > **用 5 种语言，178 个经典 Demo，系统学习函数式编程核心思想。**
 
-本项目精选 **Scala、Akka、Erlang、Haskell、Rust** 五种各具特色的编程语言，通过实战代码演示函数式编程中最重要的概念。每个 Demo 都配有详细的中文注释，适合对照学习、理解不同语言对同一思想的表达方式。
+本项目精选 **Scala、Akka、Erlang、Elixir、Haskell、Rust** 六种各具特色的编程语言，通过实战代码演示函数式编程中最重要的概念。每个 Demo 都配有详细的中文注释，适合对照学习、理解不同语言对同一思想的表达方式。其中 Erlang 与 Elixir 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，一起形成 BEAM 家族的两种不同编程风格。
 
 目前 `Scala` 部分已经从基础语法一路补充到：**错误处理、尾递归、惰性求值、Type Class 风格、表单校验、状态机建模、表达式求值器、递归 JSON、Validated、Monoid、Functor / Applicative / Monad、Reader / State，以及 IO / Resource / 并发 / 流处理直觉，并进一步过渡到最小 HTTP 服务、Tagless Final、Kleisli 请求管道、Retry / Backoff、测试解释器，最后进入真实 `cats-effect` / `fs2` / `http4s` 的高级实战阶段，并继续覆盖 `circe` JSON 编解码、http4s JSON API、http4s client、fs2 Queue 工作流、effect 的 timeout / cancel、`Ref / Deferred` 协作、Topic 发布订阅、Bearer 鉴权、Ember 本地联调、munit-cats-effect 测试化，以及 `Semaphore` 并发限流、fs2 `parEvalMap` 并行流、http4s 领域错误映射、Tagless + http4s 模块装配、路由级集成测试，并继续扩展到 `Supervisor` 后台任务托管、多路流 `merge`、官方 `AuthMiddleware`、`EitherT` 错误编排和鉴权中间件测试，随后补齐 `race` 竞速与自动取消、fs2 流式错误恢复、http4s client 中间件、下游服务聚合与编排测试，再推进到 `uncancelable` / `poll`、停流信号、client retry、`ContextRoutes` 与治理测试，并继续延伸到 `Dispatcher` 回调桥接、fs2 `groupWithin` 批处理窗口、http4s 流式响应、Ember 流式 client、流式路由测试、`IOLocal`、fs2 `Pull`、SSE、`MapRef` 分片状态、房间广播枢纽、http4s WebSocket、JDK WebSocket 回调桥接、WebSocket 路由测试，以及 Multipart 上传、fs2 固定分块处理、Doobie `Transactor` 资源、Tagless Repository + SQL 解释器与仓储集成测试，并继续推进到 Doobie 流式导出、fs2 CSV 导入管道、http4s CSV 下载接口、Tagless 批量导入模块与导入导出集成测试，以及 cats-effect 并发幂等门闩、fs2 重复请求流去重、http4s `Idempotency-Key` 写接口、Doobie 持久化幂等写入与幂等写接口集成测试，并继续延伸到 cats-effect Outbox 协调器、fs2 Outbox 重试发布流、http4s Webhook + Outbox 发布边界、Doobie 事务 Outbox 与事务 Outbox 集成测试，以及 cats-effect Inbox 协调器、fs2 Inbox 重试消费流、http4s Webhook Inbox 接收边界、Doobie 事务 Inbox 与事务 Inbox 集成测试，并继续推进到 cats-effect Saga 协调器、fs2 Saga 超时补偿流、http4s Saga 工作流边界、Doobie 事务 Saga 状态与 Saga 集成测试，以及 cats-effect 读模型投影协调器、fs2 读模型回放流、http4s 读模型查询边界、Doobie 事务投影 checkpoint 与读模型回放集成测试**，并附带了一份独立的学习路线文档 `SCALA_FP_ROADMAP.md`。
 
@@ -216,7 +216,25 @@ functioallanguagedemo01/
 │   ├── 08_async_streams_tokio.rs       # async/await + 最小 Future 执行器 + Stream
 │   ├── 09_typestate_pattern.rs         # Typestate：用类型刻协议（对应 Haskell Phantom）
 │   └── 10_parser_combinators.rs        # 零依赖 parser combinators（对应 Haskell 10）
-├── LANGUAGE_COMPARISON.md              # 四语言跨语言对照表
+├── elixir/                             # BEAM 上的现代化语法：Erlang 的孪生兄弟
+│   ├── 01_basics_pipeline.exs          # 基础语法 + 管道 |> + 模式匹配
+│   ├── 02_struct_protocol_behaviour.exs# struct / protocol / behaviour 多态三件套
+│   ├── 03_with_result_flow.exs         # with 语句 × Result 流程控制
+│   ├── 04_macros_intro.exs             # 宏系统入门 quote/unquote/defmacro
+│   ├── 05_macros_dsl_router.exs        # 宏进阶：自制路由 DSL
+│   ├── 06_genserver_agent_task.exs     # GenServer / Agent / Task
+│   ├── 07_supervisor_registry.exs      # Supervisor / DynamicSupervisor / Registry
+│   ├── 08_task_supervisor_async_stream.exs # Task.Supervisor × async_stream
+│   ├── 09_ecto_repo_changeset_multi.exs# Ecto: Repo / Schema / Changeset / Multi
+│   ├── 10_phoenix_router_plug.exs      # Phoenix 风格 Plug 路由（http 4001）
+│   ├── 11_liveview_mental_model.exs    # LiveView 心智模型（本地版）
+│   ├── 12_flow_genstage_broadway.exs   # Flow / GenStage / Broadway 流式管道
+│   ├── 13_telemetry_opentelemetry.exs  # Telemetry + OpenTelemetry
+│   ├── 14_exunit_doctest_mox_streamdata.exs # ExUnit + doctest + Mox + StreamData
+│   ├── 15_mix_umbrella_releases.exs    # mix / umbrella / releases 骨架
+│   ├── run.sh                          # Elixir Demo 一键运行脚本
+│   └── ELIXIR_FP_ROADMAP.md            # Elixir FP 学习路线图
+├── LANGUAGE_COMPARISON.md              # 多语言跨语言对照表
 └── README.md
 ```
 
@@ -224,101 +242,111 @@ functioallanguagedemo01/
 
 ## 🎯 核心概念一览
 
-| 函数式概念 | Scala | Erlang | Haskell | Rust | 简要说明 |
-|:---:|:---:|:---:|:---:|:---:|:---|
-| **高阶函数** | ✅ 01 | ✅ 02 | ✅ 01 | ✅ 01 | 函数作为参数/返回值，`map/filter/fold` |
-| **模式匹配** | ✅ 02 / 09 | ✅ 01 | ✅ 02 | ✅ 02 | 按数据结构和值进行分支 |
-| **代数数据类型 (ADT)** | ✅ 02 / 09 / 10 / 11 | — | ✅ 02 | ✅ 02 | 用类型系统表达状态与结构 |
-| **不可变性** | ✅ 03 / 09 | 🔵 天然 | 🔵 天然 | ✅ 03 | 数据创建后不可修改 |
-| **柯里化 / 部分应用** | ✅ 03 | — | ✅ 03 | ✅ 01 | 多参函数拆为单参函数链 |
-| **函数组合** | ✅ 03 | ✅ 02 | ✅ 03 | ✅ 03 | 将小函数组合成复杂管道 |
-| **错误处理 (Either / Try)** | ✅ 04 / 08 / 10 | — | ✅ 02 | ✅ 02 | 把失败显式放进类型，而不是滥用异常 |
-| **递归 / 尾递归** | ✅ 05 / 10 / 11 | ✅ 01 | ✅ 01 | — | 用递归替代循环，并递归处理树形结构 |
-| **惰性求值** | ✅ 06 / 20 | — | ✅ 01 | — | 表达式延迟到真正需要时才求值 |
-| **Monad (Option/Maybe)** | ✅ 02 / 04 / 14 | — | ✅ 02 | ✅ 02 | 在上下文中链式计算 |
-| **类型类 / Trait** | ✅ 07 | — | ✅ 02 | ✅ 03 | 类型多态的抽象机制 |
-| **业务校验** | ✅ 08 / 12 | — | ✅ 02 | ✅ 02 | 用纯函数描述校验规则 |
-| **状态机建模** | ✅ 09 | ✅ 03 | ✅ 15 | — | 用 ADT 表达合法与非法状态流转（Haskell 用 GADT + DataKinds 把状态升到类型层）|
-| **递归数据结构** | ✅ 10 / 11 | ✅ 01 | ✅ 01 / 02 | ✅ 02 | 表达式树、JSON、树结构等 |
-| **Semigroup / Monoid** | ✅ 13 | — | ✅ 02 / 14 | — | 抽象“可合并”的数据与规则 |
-| **Functor / Applicative / Monad** | ✅ 14 | — | ✅ 02 / 09 | — | 在上下文里变换、组合、串联计算 |
-| **Reader / State** | ✅ 15 / 16 | — | ✅ 05 | — | 用纯函数表达环境依赖与状态推进 |
-| **IO / 副作用建模** | ✅ 17 / 26 / 30 | — | ✅ 04 | — | 先描述副作用，再决定何时执行，并进一步进入真实 effect system |
-| **Resource** | ✅ 18 / 27 | — | — | — | 统一管理资源申请、使用和释放 |
-| **并发组合** | ✅ 19 / 26 | ✅ 03 | ✅ 06 | — | 组合独立任务，并行后再汇总结果（Haskell 用 STM）|
-| **流处理 / Stream** | ✅ 20 / 28 | — | ✅ 01 / 16 | — | 像管道一样逐步消费大数据或无限流 |
-| **HTTP 服务建模** | ✅ 21 / 29 | — | — | — | 把请求、响应、路由、中间件组织成可组合函数 |
-| **Tagless Final / Algebra** | ✅ 22 / 25 / 30 | — | ✅ 11 | — | 抽象业务能力，再替换不同解释器（Haskell 以 Free Monad DSL 呈现）|
-| **Monad Transformer** | — | — | ✅ 08 | — | 堆叠多个 effect（ExceptT / StateT / ReaderT）|
-| **Lens / Optics** | — | — | ✅ 09 / 13 | — | `view` / `set` / `over` 聚焦嵌套结构的某个字段 |
-| **Parser 组合子** | — | — | ✅ 10 | — | 用小 parser 组合出完整解析器 |
-| **性质测试 / QuickCheck** | — | — | ✅ 12 | — | 对任意输入成立的性质 + 自动 shrink |
-| **Arrow / Profunctor** | — | — | ✅ 13 | — | 比 Monad 更抽象的计算模型，滨变 + 协变组合 |
-| **Foldable / Traversable** | — | — | ✅ 14 | — | 用 Monoid 统一聚合，用 `traverse` 把 effect 从结构内抽出来 |
-| **类型级编程 (GADT / DataKinds / TypeFamilies)** | — | — | ✅ 15 | — | 把约束从运行时提升到编译时 |
-| **Lambda 演算 / fix / Church encoding** | — | — | ✅ 17 | — | FP 的数学底座，匿名递归与折叠同构 |
-| **Alternative / MonadPlus** | — | — | ✅ 18 | — | 失败 / 选择 / 回溯搜索的统一抽象 |
-| **异常 / bracket / 轻量级并发** | — | — | ✅ 19 | — | `try / throwIO / bracket / MVar / forkIO`，手写 async |
-| **Generics / DerivingVia** | — | — | ✅ 20 | — | 类型驱动的编解码与实例复用 |
-| **Effect System (MTL / Free)** | — | — | ✅ 21 | — | 同一段业务，生产 / 测试 / Trace 解释器自由切换 |
-| **状态机属性测试 / 工程最佳实践** | — | — | ✅ 22 | — | 随机命令序列对照纯模型，附完整工程清单 |
-| **Kleisli / ReaderT** | ✅ 23 | — | — | — | 把环境依赖与 effect 组合成请求管道 |
-| **Retry / Backoff** | ✅ 24 | — | — | — | 把失败恢复策略从业务中分离出来 |
-| **测试解释器** | ✅ 25 | — | — | — | 用纯状态替代真实外部系统，验证业务逻辑 |
-| **JSON 编解码** | ✅ 31 | — | — | ✅ 02 | 用类型驱动协议，而不是手写字符串拼接 |
-| **JSON API** | ✅ 32 | — | — | — | 把请求体解析、响应体编码和业务校验接进 HTTP 层 |
-| **HTTP Client** | ✅ 33 / 39 / 53 / 54 | — | — | — | 作为调用方消费下游服务并解码响应，并进一步补齐中间件与下游聚合 |
-| **Queue 工作流** | ✅ 34 | — | — | — | 用队列表达生产者 / 消费者和异步任务分发 |
-| **取消 / 超时控制** | ✅ 35 | — | — | — | 把 timeout、cancel、finalizer 纳入统一 effect 模型 |
-| **Ref / Deferred 协作** | ✅ 36 | — | — | — | 用并发安全状态和一次性信号协调异步流程 |
-| **Topic 发布订阅** | ✅ 37 / 72 | — | — | — | 用广播模型把同一条事件分发给多个订阅者，并继续推进到房间广播枢纽 |
-| **Bearer 鉴权** | ✅ 38 | — | — | — | 在 HTTP 中间件层完成认证和权限控制 |
-| **测试框架化** | ✅ 40 / 55 | — | — | — | 把带 IO 的服务与调用方编排都放进真实测试框架里执行断言 |
-| **并发限流** | ✅ 41 | — | — | — | 用 Semaphore 限制关键区和下游资源的并发占用 |
-| **流式并行处理** | ✅ 42 | — | — | — | 在 fs2 流里对元素做有序或无序的并发 effect 处理 |
-| **领域错误映射** | ✅ 43 | — | — | — | 先返回业务错误，再在 HTTP 边界统一翻译成响应 |
-| **模块装配** | ✅ 44 | — | — | — | 把 algebra、service、解释器和 routes 组装成完整服务模块 |
-| **路由集成测试** | ✅ 45 | — | — | — | 直接对 http4s 路由做请求 / 响应级断言 |
-| **后台任务托管** | ✅ 46 | — | — | — | 用 Supervisor 在作用域内统一托管和回收后台 fiber |
-| **多路流合并** | ✅ 47 | — | — | — | 把不同来源的事件流合并进同一条 fs2 管道 |
-| **AuthMiddleware 鉴权** | ✅ 48 / 50 | — | — | — | 用官方认证中间件把用户上下文和失败处理接入路由 |
-| **EitherT 错误编排** | ✅ 49 / 54 | — | — | — | 把领域错误和 effect 叠成一条可组合业务流程，并推进到下游服务聚合 |
-| **竞速与自动取消** | ✅ 51 | — | — | — | 用 race 让多个来源并发竞争，并自动取消输掉的一方 |
-| **流式错误恢复** | ✅ 52 | — | — | — | 在 fs2 里区分 error channel 和 value channel 的恢复策略 |
-| **Client 中间件** | ✅ 53 | — | — | — | 在调用方统一注入 traceId、日志和上下文头部 |
-| **下游服务聚合** | ✅ 54 | — | — | — | 组合多个下游响应，拼装成上层视图或聚合接口 |
-| **调用方编排测试** | ✅ 55 | — | — | — | 验证下游编排、短路和领域错误映射是否符合预期 |
-| **取消边界** | ✅ 56 | — | — | — | 用 `uncancelable` / `poll` 精细划分可等待区和不可中断关键区 |
-| **停流信号** | ✅ 57 | — | — | — | 用 `SignallingRef` 显式传播长生命周期流的停止条件 |
-| **调用方重试治理** | ✅ 58 / 60 | — | — | — | 把 503 重试、404 直返、退避和策略测试纳入统一治理 |
-| **请求上下文注入** | ✅ 59 | — | — | — | 用 `ContextMiddleware` / `ContextRoutes` 类型安全地下发上下文 |
-| **回调边界桥接** | ✅ 61 | — | — | — | 用 `Dispatcher` 把旧式回调重新接回 `IO` / `Queue` / `Stream` |
-| **批处理窗口** | ✅ 62 | — | — | — | 用 `groupWithin` 按数量或时间窗口聚合零散事件 |
-| **HTTP 流式响应** | ✅ 63 / 65 | — | — | — | 让路由持续产出字节流，并对流式输出做自动化验证 |
-| **真实流式 Client** | ✅ 64 / 69 / 74 | — | — | — | 在真实网络下边接收边解码边消费响应体，并继续补齐 SSE / WebSocket 客户端消费 |
-| **按 key 分片状态** | ✅ 71 | — | — | — | 用 `MapRef` 管理房间、租户、会话等按 key 拆分的原子状态 |
-| **WebSocket 双向通信** | ✅ 73 / 74 / 75 | — | — | — | 让客户端和服务端在同一条连接里持续双向收发消息，并进入测试闭环 |
-| **Multipart 上传** | ✅ 76 | — | — | — | 在同一请求里同时接收表单字段和文件流 |
-| **分块文件处理** | ✅ 77 | — | — | — | 把连续字节流重组为固定大小的处理块，服务于重试、断点续传和分片导入 |
-| **数据库资源与事务** | ✅ 78 / 80 | — | — | — | 用 `Resource` 与事务边界统一管理数据库连接、回滚和集成测试 |
-| **Repository + SQL 解释器** | ✅ 79 / 80 | — | — | — | 把 Tagless Repository 落到真实 SQL 仓储，并用真实数据库回归验证 |
-| **数据库流式导出** | ✅ 81 | — | — | — | 用 `query.stream` 把数据库结果逐行导出成报表流 |
-| **CSV 导入管道** | ✅ 82 / 84 / 85 | — | — | — | 把字节流解析、校验、分批并落到真实仓储边界 |
-| **CSV 下载接口** | ✅ 83 / 85 | — | — | — | 用 http4s 流式返回报表文件，并对导出内容做自动化验证 |
-| **重复请求去重** | ✅ 86 / 87 | — | — | — | 用并发门闩和流式去重拦住同进程重复提交与消息重放 |
-| **幂等写入** | ✅ 88 / 89 / 90 | — | — | — | 用 `Idempotency-Key` 和数据库持久化记录保证 POST 重试不重复落库 |
-| **事务 Outbox / 最终一致性** | ✅ 91 / 92 / 93 / 94 / 95 | — | — | — | 用同事务写入、后台重试和发布状态推进把“写库后发事件”真正做可靠 |
-| **事务 Inbox / 消费端幂等** | ✅ 96 / 97 / 98 / 99 / 100 | — | — | — | 用消费端去重、Webhook 接收保护和事务 processed_event 记录保证下游重复投递只真正处理一次 |
-| **Saga 补偿 / 跨服务工作流** | ✅ 101 / 102 / 103 / 104 / 105 | — | — | — | 用补偿动作、超时扫描、支付回调和事务状态推进组织跨步骤业务一致性 |
-| **读模型投影 / 事件回放** | ✅ 106 / 107 / 108 / 109 / 110 | — | — | — | 用 checkpoint、lag、查询侧重建和事务投影保证读模型可追赶、可回放、可验证 |
-| **CQRS 命令查询职责分离** | ✅ 111 / 112 / 113 / 114 / 115 | — | — | — | 把写侧命令总线和读侧查询路由显式分开，命令 202 不返回读模型，查询不产生副作用 |
-| **事件溯源** | ✅ 116 / 117 / 118 / 119 / 120 | — | — | — | 只存事件序列，状态从 fold 重建；乐观锁防并发冲突；时间旅行可重建历史时刻 |
-| **进程管理器** | ✅ 121 / 122 / 123 / 124 / 125 | — | — | — | 跨有界上下文工作流协调；监听事件→推进状态→发出命令；幂等事件处理与命令 Outbox |
-| **防腐层（ACL）** | ✅ 126 / 127 / 128 / 129 / 130 | — | — | — | 把上游模型翻译成本地领域概念；翻译失败写拒绝日志；幂等接收与内部领域保护 |
-| **有界上下文地图集成** | ✅ 131 / 132 / 133 / 134 / 135 | — | — | — | 四个有界上下文装配成完整履约系统；统一网关聚合视图；端到端集成验证 |
-| **列表推导** | — | ✅ 02 | ✅ 01 | — | 声明式的列表构建语法 |
-| **Actor 并发模型** | — | ✅ 03 | — | — | 进程间消息传递，无共享状态 |
-| **Akka Actor / 状态机 / Streams / Persistence / Projection** | — (见 scala/akka/) | ✅ 03 | — | — | Akka Typed Actor、FSM、Akka Streams、EventSourcedBehavior、CQRS 投影 |
+| 函数式概念 | Scala | Erlang | Elixir | Haskell | Rust | 简要说明 |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---|
+| **高阶函数** | ✅ 01 | ✅ 02 | ✅ 01 | ✅ 01 | ✅ 01 | 函数作为参数/返回值，`map/filter/fold` |
+| **模式匹配** | ✅ 02 / 09 | ✅ 01 | ✅ 01 / 03 | ✅ 02 | ✅ 02 | 按数据结构和值进行分支 |
+| **代数数据类型 (ADT)** | ✅ 02 / 09 / 10 / 11 | — | ✅ 02 | ✅ 02 | ✅ 02 | 用类型系统表达状态与结构（Elixir 用 struct + protocol + tuple tag 组合表达）|
+| **不可变性** | ✅ 03 / 09 | 🔵 天然 | 🔵 天然 | 🔵 天然 | ✅ 03 | 数据创建后不可修改 |
+| **柯里化 / 部分应用** | ✅ 03 | — | ✅ 01 | ✅ 03 | ✅ 01 | 多参函数拆为单参函数链（Elixir 用 `&fun/3` 捕获 + 管道达成等价效果）|
+| **函数组合** | ✅ 03 | ✅ 02 | ✅ 01 | ✅ 03 | ✅ 03 | 将小函数组合成复杂管道（Elixir 的 `\|>` 是招牌语法）|
+| **错误处理 (Either / Try)** | ✅ 04 / 08 / 10 | — | ✅ 03 | ✅ 02 | ✅ 02 | 把失败显式放进类型，而不是滥用异常（Elixir 用 `{:ok, _}` / `{:error, _}` tuple）|
+| **递归 / 尾递归** | ✅ 05 / 10 / 11 | ✅ 01 | ✅ 01 | ✅ 01 | — | 用递归替代循环，并递归处理树形结构（BEAM 保证尾递归零栈增长）|
+| **惰性求值** | ✅ 06 / 20 | — | ✅ 08 / 12 | ✅ 01 | — | 表达式延迟到真正需要时才求值（Elixir 以 `Stream` / `Flow` 表达惰性管道）|
+| **Monad (Option/Maybe)** | ✅ 02 / 04 / 14 | — | ✅ 03 | ✅ 02 | ✅ 02 | 在上下文中链式计算（Elixir 用 `with` 语句近似 do-notation）|
+| **类型类 / Trait** | ✅ 07 | — | ✅ 02 | ✅ 02 | ✅ 03 | 类型多态的抽象机制（Elixir 的 Protocol 是运行时 type class）|
+| **业务校验** | ✅ 08 / 12 | — | ✅ 03 / 09 | ✅ 02 | ✅ 02 | 用纯函数描述校验规则（Elixir 以 `Ecto.Changeset` 管道化）|
+| **状态机建模** | ✅ 09 | ✅ 03 | ✅ 06 / 11 | ✅ 15 | — | 用 ADT / 行为表达合法与非法状态流转（Elixir 以 GenServer + pattern match 表达）|
+| **递归数据结构** | ✅ 10 / 11 | ✅ 01 | ✅ 01 | ✅ 01 / 02 | ✅ 02 | 表达式树、JSON、树结构等 |
+| **Semigroup / Monoid** | ✅ 13 | — | — | ✅ 02 / 14 | — | 抽象“可合并”的数据与规则 |
+| **Functor / Applicative / Monad** | ✅ 14 | — | ✅ 03 | ✅ 02 / 09 | — | 在上下文里变换、组合、串联计算 |
+| **Reader / State** | ✅ 15 / 16 | — | ✅ 06 | ✅ 05 | — | 用纯函数表达环境依赖与状态推进（Elixir 以 Agent / GenServer 封装状态）|
+| **IO / 副作用建模** | ✅ 17 / 26 / 30 | — | ✅ 06 / 10 | ✅ 04 | — | 先描述副作用，再决定何时执行，并进一步进入真实 effect system |
+| **Resource** | ✅ 18 / 27 | — | ✅ 07 | — | — | 统一管理资源申请、使用和释放（Elixir 以 Supervisor / DynamicSupervisor 托管资源）|
+| **并发组合** | ✅ 19 / 26 | ✅ 03 | ✅ 06 / 08 | ✅ 06 | — | 组合独立任务，并行后再汇总结果（Elixir 用 Task / async_stream）|
+| **流处理 / Stream** | ✅ 20 / 28 | — | ✅ 08 / 12 | ✅ 01 / 16 | — | 像管道一样逐步消费大数据或无限流（Elixir 的 Flow/GenStage/Broadway）|
+| **HTTP 服务建模** | ✅ 21 / 29 | — | ✅ 10 / 11 | — | — | 把请求、响应、路由、中间件组织成可组合函数（Elixir 的 Plug / Phoenix / LiveView）|
+| **Tagless Final / Algebra** | ✅ 22 / 25 / 30 | — | ✅ 02 | ✅ 11 | — | 抽象业务能力，再替换不同解释器（Elixir 以 behaviour + Mox 达成可替换解释器）|
+| **Monad Transformer** | — | — | — | ✅ 08 | — | 堆叠多个 effect（ExceptT / StateT / ReaderT）|
+| **Lens / Optics** | — | — | — | ✅ 09 / 13 | — | `view` / `set` / `over` 聚焦嵌套结构的某个字段 |
+| **Parser 组合子** | — | — | — | ✅ 10 | — | 用小 parser 组合出完整解析器 |
+| **性质测试 / QuickCheck** | — | — | ✅ 14 | ✅ 12 | — | 对任意输入成立的性质 + 自动 shrink（Elixir 的 StreamData）|
+| **Arrow / Profunctor** | — | — | — | ✅ 13 | — | 比 Monad 更抽象的计算模型，滨变 + 协变组合 |
+| **Foldable / Traversable** | — | — | — | ✅ 14 | — | 用 Monoid 统一聚合，用 `traverse` 把 effect 从结构内抽出来 |
+| **类型级编程 (GADT / DataKinds / TypeFamilies)** | — | — | — | ✅ 15 | — | 把约束从运行时提升到编译时 |
+| **Lambda 演算 / fix / Church encoding** | — | — | — | ✅ 17 | — | FP 的数学底座，匿名递归与折叠同构 |
+| **Alternative / MonadPlus** | — | — | — | ✅ 18 | — | 失败 / 选择 / 回溯搜索的统一抽象 |
+| **异常 / bracket / 轻量级并发** | — | — | — | ✅ 19 | — | `try / throwIO / bracket / MVar / forkIO`，手写 async |
+| **Generics / DerivingVia** | — | — | — | ✅ 20 | — | 类型驱动的编解码与实例复用 |
+| **Effect System (MTL / Free)** | — | — | ✅ 13 | ✅ 21 | — | 同一段业务，生产 / 测试 / Trace 解释器自由切换（Elixir 的 Telemetry 也是同构思路）|
+| **状态机属性测试 / 工程最佳实践** | — | — | ✅ 14 | ✅ 22 | — | 随机命令序列对照纯模型，附完整工程清单（Elixir 以 ExUnit + StreamData 达成）|
+| **Kleisli / ReaderT** | ✅ 23 | — | — | — | — | 把环境依赖与 effect 组合成请求管道 |
+| **Retry / Backoff** | ✅ 24 | — | — | — | — | 把失败恢复策略从业务中分离出来 |
+| **测试解释器** | ✅ 25 | — | — | — | — | 用纯状态替代真实外部系统，验证业务逻辑 |
+| **JSON 编解码** | ✅ 31 | — | — | — | ✅ 02 | 用类型驱动协议，而不是手写字符串拼接 |
+| **JSON API** | ✅ 32 | — | — | — | — | 把请求体解析、响应体编码和业务校验接进 HTTP 层 |
+| **HTTP Client** | ✅ 33 / 39 / 53 / 54 | — | — | — | — | 作为调用方消费下游服务并解码响应，并进一步补齐中间件与下游聚合 |
+| **Queue 工作流** | ✅ 34 | — | — | — | — | 用队列表达生产者 / 消费者和异步任务分发 |
+| **取消 / 超时控制** | ✅ 35 | — | — | — | — | 把 timeout、cancel、finalizer 纳入统一 effect 模型 |
+| **Ref / Deferred 协作** | ✅ 36 | — | — | — | — | 用并发安全状态和一次性信号协调异步流程 |
+| **Topic 发布订阅** | ✅ 37 / 72 | — | — | — | — | 用广播模型把同一条事件分发给多个订阅者，并继续推进到房间广播枢纽 |
+| **Bearer 鉴权** | ✅ 38 | — | — | — | — | 在 HTTP 中间件层完成认证和权限控制 |
+| **测试框架化** | ✅ 40 / 55 | — | — | — | — | 把带 IO 的服务与调用方编排都放进真实测试框架里执行断言 |
+| **并发限流** | ✅ 41 | — | — | — | — | 用 Semaphore 限制关键区和下游资源的并发占用 |
+| **流式并行处理** | ✅ 42 | — | — | — | — | 在 fs2 流里对元素做有序或无序的并发 effect 处理 |
+| **领域错误映射** | ✅ 43 | — | — | — | — | 先返回业务错误，再在 HTTP 边界统一翻译成响应 |
+| **模块装配** | ✅ 44 | — | — | — | — | 把 algebra、service、解释器和 routes 组装成完整服务模块 |
+| **路由集成测试** | ✅ 45 | — | — | — | — | 直接对 http4s 路由做请求 / 响应级断言 |
+| **后台任务托管** | ✅ 46 | — | — | — | — | 用 Supervisor 在作用域内统一托管和回收后台 fiber |
+| **多路流合并** | ✅ 47 | — | — | — | — | 把不同来源的事件流合并进同一条 fs2 管道 |
+| **AuthMiddleware 鉴权** | ✅ 48 / 50 | — | — | — | — | 用官方认证中间件把用户上下文和失败处理接入路由 |
+| **EitherT 错误编排** | ✅ 49 / 54 | — | — | — | — | 把领域错误和 effect 叠成一条可组合业务流程，并推进到下游服务聚合 |
+| **竞速与自动取消** | ✅ 51 | — | — | — | — | 用 race 让多个来源并发竞争，并自动取消输掉的一方 |
+| **流式错误恢复** | ✅ 52 | — | — | — | — | 在 fs2 里区分 error channel 和 value channel 的恢复策略 |
+| **Client 中间件** | ✅ 53 | — | — | — | — | 在调用方统一注入 traceId、日志和上下文头部 |
+| **下游服务聚合** | ✅ 54 | — | — | — | — | 组合多个下游响应，拼装成上层视图或聚合接口 |
+| **调用方编排测试** | ✅ 55 | — | — | — | — | 验证下游编排、短路和领域错误映射是否符合预期 |
+| **取消边界** | ✅ 56 | — | — | — | — | 用 `uncancelable` / `poll` 精细划分可等待区和不可中断关键区 |
+| **停流信号** | ✅ 57 | — | — | — | — | 用 `SignallingRef` 显式传播长生命周期流的停止条件 |
+| **调用方重试治理** | ✅ 58 / 60 | — | — | — | — | 把 503 重试、404 直返、退避和策略测试纳入统一治理 |
+| **请求上下文注入** | ✅ 59 | — | — | — | — | 用 `ContextMiddleware` / `ContextRoutes` 类型安全地下发上下文 |
+| **回调边界桥接** | ✅ 61 | — | — | — | — | 用 `Dispatcher` 把旧式回调重新接回 `IO` / `Queue` / `Stream` |
+| **批处理窗口** | ✅ 62 | — | — | — | — | 用 `groupWithin` 按数量或时间窗口聚合零散事件 |
+| **HTTP 流式响应** | ✅ 63 / 65 | — | — | — | — | 让路由持续产出字节流，并对流式输出做自动化验证 |
+| **真实流式 Client** | ✅ 64 / 69 / 74 | — | — | — | — | 在真实网络下边接收边解码边消费响应体，并继续补齐 SSE / WebSocket 客户端消费 |
+| **按 key 分片状态** | ✅ 71 | — | — | — | — | 用 `MapRef` 管理房间、租户、会话等按 key 拆分的原子状态 |
+| **WebSocket 双向通信** | ✅ 73 / 74 / 75 | — | — | — | — | 让客户端和服务端在同一条连接里持续双向收发消息，并进入测试闭环 |
+| **Multipart 上传** | ✅ 76 | — | — | — | — | 在同一请求里同时接收表单字段和文件流 |
+| **分块文件处理** | ✅ 77 | — | — | — | — | 把连续字节流重组为固定大小的处理块，服务于重试、断点续传和分片导入 |
+| **数据库资源与事务** | ✅ 78 / 80 | — | — | — | — | 用 `Resource` 与事务边界统一管理数据库连接、回滚和集成测试 |
+| **Repository + SQL 解释器** | ✅ 79 / 80 | — | — | — | — | 把 Tagless Repository 落到真实 SQL 仓储，并用真实数据库回归验证 |
+| **数据库流式导出** | ✅ 81 | — | — | — | — | 用 `query.stream` 把数据库结果逐行导出成报表流 |
+| **CSV 导入管道** | ✅ 82 / 84 / 85 | — | — | — | — | 把字节流解析、校验、分批并落到真实仓储边界 |
+| **CSV 下载接口** | ✅ 83 / 85 | — | — | — | — | 用 http4s 流式返回报表文件，并对导出内容做自动化验证 |
+| **重复请求去重** | ✅ 86 / 87 | — | — | — | — | 用并发门闩和流式去重拦住同进程重复提交与消息重放 |
+| **幂等写入** | ✅ 88 / 89 / 90 | — | — | — | — | 用 `Idempotency-Key` 和数据库持久化记录保证 POST 重试不重复落库 |
+| **事务 Outbox / 最终一致性** | ✅ 91 / 92 / 93 / 94 / 95 | — | — | — | — | 用同事务写入、后台重试和发布状态推进把“写库后发事件”真正做可靠 |
+| **事务 Inbox / 消费端幂等** | ✅ 96 / 97 / 98 / 99 / 100 | — | — | — | — | 用消费端去重、Webhook 接收保护和事务 processed_event 记录保证下游重复投递只真正处理一次 |
+| **Saga 补偿 / 跨服务工作流** | ✅ 101 / 102 / 103 / 104 / 105 | — | — | — | — | 用补偿动作、超时扫描、支付回调和事务状态推进组织跨步骤业务一致性 |
+| **读模型投影 / 事件回放** | ✅ 106 / 107 / 108 / 109 / 110 | — | — | — | — | 用 checkpoint、lag、查询侧重建和事务投影保证读模型可追赶、可回放、可验证 |
+| **CQRS 命令查询职责分离** | ✅ 111 / 112 / 113 / 114 / 115 | — | — | — | — | 把写侧命令总线和读侧查询路由显式分开，命令 202 不返回读模型，查询不产生副作用 |
+| **事件溯源** | ✅ 116 / 117 / 118 / 119 / 120 | — | — | — | — | 只存事件序列，状态从 fold 重建；乐观锁防并发冲突；时间旅行可重建历史时刻 |
+| **进程管理器** | ✅ 121 / 122 / 123 / 124 / 125 | — | — | — | — | 跨有界上下文工作流协调；监听事件→推进状态→发出命令；幂等事件处理与命令 Outbox |
+| **防腐层（ACL）** | ✅ 126 / 127 / 128 / 129 / 130 | — | — | — | — | 把上游模型翻译成本地领域概念；翻译失败写拒绝日志；幂等接收与内部领域保护 |
+| **有界上下文地图集成** | ✅ 131 / 132 / 133 / 134 / 135 | — | — | — | — | 四个有界上下文装配成完整履约系统；统一网关聚合视图；端到端集成验证 |
+| **列表推导** | — | ✅ 02 | ✅ 01 | ✅ 01 | — | 声明式的列表构建语法（Elixir 的 `for` 支持 generator/filter/into）|
+| **Actor 并发模型** | — | ✅ 03 | ✅ 06 / 07 | — | — | 进程间消息传递，无共享状态（Elixir 的 GenServer / Agent / Task / Registry）|
+| **Akka Actor / 状态机 / Streams / Persistence / Projection** | — (见 scala/akka/) | ✅ 03 | ✅ 06 / 07 / 12 | — | — | Akka Typed Actor、FSM、Akka Streams、EventSourcedBehavior、CQRS 投影 |
+| **宏与元编程** | — | — | ✅ 04 / 05 | ✅ 20 | ✅ 20 / 21 | 把代码当数据：`quote` / `unquote` / `defmacro` / DSL 生成（Elixir 是招牌能力）|
+| **GenServer / Agent / Task** | — | ✅ 04 | ✅ 06 | — | — | OTP 的行为抽象三件套：同步/异步 server、状态持有者、一次性异步任务 |
+| **Supervisor 树 / Registry** | — | ✅ 05 | ✅ 07 | — | — | 用监督树保证进程崩溃自愈，用 Registry 做 key→pid 命名 |
+| **Phoenix / Plug / LiveView** | — | — | ✅ 10 / 11 | — | — | Elixir Web 全家桶：管道式路由、服务器端渲染、WebSocket 心智模型 |
+| **Ecto (Repo / Changeset / Multi)** | — | — | ✅ 09 | — | — | 函数式 ORM：schema + 校验管道 + 多步事务打包 |
+| **GenStage / Flow / Broadway** | — | — | ✅ 12 | — | — | 带背压的生产者-消费者与真实消息中间件对接的流式管道 |
+| **Telemetry / OpenTelemetry** | — | — | ✅ 13 | — | — | 运行时结构化事件 + OTel 标准 trace/metric 的原生桥接 |
+| **ExUnit / doctest / Mox / StreamData** | — | — | ✅ 14 | — | — | 异步单测、文档即测试、行为 mock、属性测试一套打包 |
+| **mix / umbrella / releases** | — | — | ✅ 15 | — | — | Elixir 的工程化三板斧：构建工具、多应用 monorepo、自包含发布包 |
+| **Erlang ↔ Elixir 互操作** | — | ✅ 25 | ✅ 01~15 | — | — | 同一套 BEAM 运行时，`.beam` 100% 互通；Elixir 模块 `Foo.Bar` ↔ Erlang `'Elixir.Foo.Bar'` |
 
 ---
 
@@ -1662,6 +1690,117 @@ Rust 将函数式特性融入系统级语言，迭代器是零成本抽象的典
 
 ---
 
+### 🟡 Elixir — BEAM 上的现代化语法糖
+
+Elixir 和 Erlang 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，但带来了更现代的语法：管道 `|>`、强大的宏系统、`with` 表达式、Protocol / Behaviour 多态三件套，以及 Phoenix / Ecto / LiveView 这套成熟的 Web 生态。当前这组 Demo 从零依赖语法一路覆盖到真实 hex 生态：**基础语法 & 管道 → Protocol / Behaviour 多态 → `with` × Result 流程 → 宏入门 → 宏 DSL 路由 → GenServer/Agent/Task → Supervisor/Registry → Task.Supervisor async_stream → Ecto Repo/Changeset/Multi → Phoenix Plug 路由 → LiveView 心智模型 → Flow/GenStage/Broadway → Telemetry + OpenTelemetry → ExUnit + doctest + Mox + StreamData → mix/umbrella/releases 工程骨架**，一条路径把 Elixir 的核心心智模型和 BEAM 生态的工程化能力串起来。其中 01~08 是零依赖的 `.exs` 脚本，09~15 通过 `Mix.install` 嵌入式拉 hex 包，在单个脚本里完成从框架心智到测试与发布的全链路演示。
+
+#### `01_basics_pipeline.exs` — 基础语法 + 管道 + 模式匹配
+- 模块 `defmodule` / 函数 `def` / 私有函数 `defp`
+- 管道操作符 `|>`：把嵌套调用拍扁成从左到右的数据流
+- 模式匹配与绑定：`{:ok, value}` / `[head | tail]` / 解构赋值
+- 守卫 `when` 子句：在匹配层做类型与范围过滤
+- 对标：Erlang 01 `pattern_matching` / Haskell `where` + 管道 `&`
+
+#### `02_struct_protocol_behaviour.exs` — struct / protocol / behaviour 多态三件套
+- `defstruct`：带默认值的记录 + 编译期字段检查
+- `defprotocol` / `defimpl`：类型类风格的开放多态（对标 Scala type class）
+- `@behaviour` + `@callback`：接口契约 + `@impl true` 静态检查
+- 三者协作：同一个业务在结构、能力和契约三层分别扩展
+- 对标：Scala case class + type class + trait / Haskell Record + class
+
+#### `03_with_result_flow.exs` — `with` 语句 × Result 流程控制
+- `{:ok, value}` / `{:error, reason}` 作为事实上的 Result
+- `with` 表达式：把多个 `case` 链条拍扁成顺序模式匹配
+- 失败短路：任一步骤不匹配立即跳到 `else` 分支
+- 业务校验流水线：解析 → 校验 → 持久化的三段式
+- 对标：Haskell `do` / Scala `for` / Rust `?` 操作符
+
+#### `04_macros_intro.exs` — 宏系统入门 `quote` / `unquote` / `defmacro`
+- AST 即数据：所有 Elixir 代码都能被 `quote` 成三元组
+- `unquote` 把变量注入到模板里，`unquote_splicing` 处理列表
+- 卫生宏（hygienic macro）：自动避免变量捕获
+- `Macro.expand/2` 在 REPL 里观察展开结果
+- 对标：Scheme `syntax-rules` / Scala 3 `inline + quotes` / Rust `macro_rules!`
+
+#### `05_macros_dsl_router.exs` — 宏进阶：自制路由 DSL
+- 用宏搭建一个迷你 HTTP 路由 DSL：`get/post/put/delete "path", do: ... end`
+- 编译期把声明累加进模块属性 `@routes`
+- 一次性在 `__before_compile__` 里生成真正的 `match/2` 函数
+- 理解 Phoenix Router / Ecto schema DSL 背后的生成机制
+- 对标：Scala 3 inline macros / Rust proc macro 派生
+
+#### `06_genserver_agent_task.exs` — GenServer / Agent / Task 三件套
+- `GenServer`：OTP 的同步/异步 server 行为（`handle_call` / `handle_cast`）
+- `Agent`：轻量状态持有，天然适合计数器、缓存、配置
+- `Task` / `Task.async` / `Task.await`：一次性异步任务
+- 状态 = fold 消息流，进程 = 最小隔离单元
+- 对标：Erlang 04 `gen_server_counter` / Akka Typed Actor / Scala cats-effect `Ref`
+
+#### `07_supervisor_registry.exs` — Supervisor / DynamicSupervisor / Registry
+- 静态 `Supervisor`：固定子进程树 + `:one_for_one` / `:rest_for_one` 策略
+- `DynamicSupervisor`：按需动态拉起子进程（房间、会话、工作者）
+- `Registry`：进程名字服务（`{:via, Registry, {Reg, key}}`）
+- 按 key 查找进程 + 崩溃重启 + 自动清理的组合拳
+- 对标：Erlang 05 `supervisor_tree` / Akka Cluster Sharding
+
+#### `08_task_supervisor_async_stream.exs` — Task.Supervisor × async_stream
+- `Task.Supervisor` 统一托管异步任务生命周期
+- `async_stream/3`：有监督的并发迭代器（可限流、可超时、可 `ordered`）
+- 链式 `Stream.map` + `async_stream` 组合流式并行处理
+- 失败任务的隔离：单个任务 crash 不会打垮整条管道
+- 对标：Scala fs2 `parEvalMap` / Rust `buffer_unordered`
+
+#### `09_ecto_repo_changeset_multi.exs` — Ecto: Repo / Schema / Changeset / Multi
+- `Ecto.Schema` 声明表结构与字段类型
+- `Ecto.Changeset`：cast / validate / constraint 的函数式校验管道
+- `Ecto.Repo`：`insert/update/delete/all` 的最小持久化 API
+- `Ecto.Multi`：把多条操作打包成单事务，失败整体回滚
+- 对标：Scala Doobie + Quill / Rust sqlx / Haskell persistent
+
+#### `10_phoenix_router_plug.exs` — Phoenix 风格 Plug 路由
+- Plug 是 Elixir Web 的核心抽象：`fn conn -> conn end` 管道函数
+- 在 4001 端口拉一个 Cowboy server，自测 `GET /hello` / `POST /echo`
+- `Plug.Router` DSL：`get` / `post` + `plug :match` / `plug :dispatch`
+- 中间件 = 普通函数：路由、日志、CORS、auth 全都是 Plug 链条上的节点
+- 对标：Scala http4s Routes / Rust axum Router / Haskell WAI middleware
+
+#### `11_liveview_mental_model.exs` — LiveView 心智模型（本地版）
+- 不依赖真实浏览器，用纯 Elixir 模拟 LiveView 的 server-side render 循环
+- `mount/3`：首次渲染拿初始 assigns；`handle_event/3`：事件推进状态
+- diff 计算：服务端只发 changed assigns，而不是整段 HTML
+- 状态保存在 LiveView 进程里，每个连接一个 GenServer
+- 对标：React + Redux 的心智，但状态在服务端
+
+#### `12_flow_genstage_broadway.exs` — Flow / GenStage / Broadway 流式管道
+- `GenStage`：带背压（back-pressure）的生产者-消费者协议
+- `Flow`：基于 GenStage 的并行数据流，支持 `partition` / `window` / `reduce`
+- `Broadway`：面向真实消息中间件（Kafka / RabbitMQ / SQS）的生产级管道
+- 背压是一等公民：下游消费慢，上游自动放缓
+- 对标：Scala fs2 + cats-effect / Akka Streams / Haskell streamly
+
+#### `13_telemetry_opentelemetry.exs` — Telemetry + OpenTelemetry
+- `:telemetry.execute/3`：发出结构化事件（event name + measurements + metadata）
+- `:telemetry.attach/4`：在运行时挂载 handler，完全解耦监控与业务
+- OpenTelemetry 桥接：把 Elixir 事件翻译成标准 span / metric
+- 全生态共用同一套 hook：Phoenix / Ecto / Broadway 默认都发 telemetry
+- 对标：Scala log4cats + otel4s / Rust tracing + opentelemetry
+
+#### `14_exunit_doctest_mox_streamdata.exs` — ExUnit + doctest + Mox + StreamData
+- `ExUnit`：async 默认开启的单元测试框架
+- `doctest`：把 `@doc` 里的交互式示例直接升级为可执行测试
+- `Mox`：基于 behaviour 的静态 mock，强制 `@impl` 契约一致
+- `StreamData`：基于性质的测试（property-based），自动 shrink 反例
+- 对标：Scala munit + ScalaCheck / Haskell HSpec + QuickCheck
+
+#### `15_mix_umbrella_releases.exs` — mix / umbrella / releases 工程骨架
+- `mix new` / `mix.exs`：单项目的依赖、编译、任务定义
+- umbrella：`apps/*` 多子应用共享依赖版本的 monorepo 结构
+- `mix release`：编译出自包含、带 ERTS 的生产发布包
+- 热升级 / config provider / runtime.exs 的最小心智
+- 对标：Rust cargo workspace / Scala sbt 多模块 / Erlang rebar3 umbrella
+
+---
+
 ## 🚀 运行方式
 
 ### Scala
@@ -1867,6 +2006,37 @@ cd rust
 rustc 01_iterators_and_closures.rs -o demo && ./demo
 ```
 
+### Elixir
+```bash
+# 需要安装 Elixir（建议 1.15+ / OTP 26+，macOS: brew install elixir）
+cd elixir
+
+# 一键运行脚本（封装了分组 / 单个 / 全量三种模式）
+./run.sh           # 只跑零依赖组 01~08（不联网、秒级完成）
+./run.sh 3         # 只跑编号 03（03_with_result_flow.exs）
+./run.sh deps      # 只跑依赖组 09~15（首次会 Mix.install 拉 hex 包）
+./run.sh all       # 跑全部 15 个 Demo（含依赖组）
+
+# 也可以直接用 elixir 命令跑单个脚本
+elixir 01_basics_pipeline.exs
+elixir 02_struct_protocol_behaviour.exs
+elixir 03_with_result_flow.exs
+elixir 04_macros_intro.exs
+elixir 05_macros_dsl_router.exs
+elixir 06_genserver_agent_task.exs
+elixir 07_supervisor_registry.exs
+elixir 08_task_supervisor_async_stream.exs
+
+# 09~15 使用 Mix.install 嵌入式拉依赖，首次 1~3 分钟，之后有缓存
+elixir 09_ecto_repo_changeset_multi.exs
+elixir 10_phoenix_router_plug.exs        # 会在 4001 端口短暂启一个 HTTP 服务并自测
+elixir 11_liveview_mental_model.exs
+elixir 12_flow_genstage_broadway.exs
+elixir 13_telemetry_opentelemetry.exs
+elixir 14_exunit_doctest_mox_streamdata.exs
+elixir 15_mix_umbrella_releases.exs
+```
+
 ---
 
 ## 🧭 推荐学习路径
@@ -1992,7 +2162,20 @@ rustc 01_iterators_and_closures.rs -o demo && ./demo
    Erlang 01/02/03 → Haskell 01/02/03 → Rust 01/02/03
    理解不同语言对函数式编程的取舍与强调点
 
-🔚 后续扩展: 查看 `scala/SCALA_FP_ROADMAP.md`
+3️⃣1️⃣ BEAM 现代语法糖: 走一圈 Elixir 的招牌能力（建议顺序 03 → 06 → 07）
+   Elixir 03 (with × Result)
+     → 看 `|>` 管道 + `with` 表达式如何把 Scala `for` / Haskell `do` 的 Monad 味道
+       用最轻的语法拍扁，业务流程写起来像纯数据管道
+   Elixir 06 (GenServer / Agent / Task)
+     → 看 OTP 行为三件套如何把“状态 = fold 消息流”“进程 = 最小隔离单元”
+       落成可直接投产的 API（对标 Erlang 04 `gen_server_counter` / Akka Typed Actor）
+   Elixir 07 (Supervisor / DynamicSupervisor / Registry)
+     → 看监督树 + 动态拉子进程 + key→pid 注册如何组合成
+       “崩溃即重启、按需开房间、天然可命名”的并发骨架（对标 Erlang 05 `supervisor_tree`）
+   这三步合起来差不多就覆盖了 Elixir 最独特的心智模型：
+     管道 / with 写业务 × OTP 行为抽象 × 监督树可靠性
+
+🔚 后续扩展: 查看 `scala/SCALA_FP_ROADMAP.md` 与 `elixir/ELIXIR_FP_ROADMAP.md`
    继续从真实库入门走向更完整的函数式服务、测试与架构拆分
 ```
 
