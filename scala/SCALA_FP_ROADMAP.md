@@ -1580,3 +1580,24 @@
 - **中级开始接触 `cats-core`**：这样你学到的是抽象本身，不只是 API。
 - **高级前置先用手写微型抽象建立直觉**：这样你上 `cats-effect`、`fs2` 时不会只是死记 API。
 - **进入高级实战后，重点不再是背 API**：而是看清这些真实库如何把 effect、资源、流、协议层、调用方和并发控制统一起来。
+
+---
+
+## 🔗 See also — 跨语言 FP 学习路线
+
+Scala 走的是 **工程优先** 的 FP 路线，很多抽象的"母语"其实在 Haskell，而落地姿势又和 Erlang/Elixir 的 actor 思维有可参照处。强烈建议横向对比：
+
+| 语言 | 路线图 | 同一抽象在那边叫什么 |
+|---|---|---|
+| 🟢 Haskell | [`../haskell/HASKELL_FP_ROADMAP.md`](../haskell/HASKELL_FP_ROADMAP.md) | `cats.Functor/Monad` → `class Functor/Monad`；`EitherT` → `ExceptT`；`cats-effect Resource` → `ResourceT` / `bracket`；`Free` / `Tagless` 两家同源 |
+| 💧 Elixir | [`../elixir/ELIXIR_FP_ROADMAP.md`](../elixir/ELIXIR_FP_ROADMAP.md) | `cats-effect IO.start` → `Task.async`；`Ref / Deferred` → `Agent` / 邮箱；`fs2.Stream` → `Flow` / `GenStage` / `Broadway`；http4s → `Plug` + Cowboy |
+| 🦀 Rust | [`../rust/`](../rust/) | `Option/Either` → `Option/Result`；typeclass `given/using` → `trait`；`cats-effect IO` → `async fn` + `tokio`；`fs2.Stream` → `futures::Stream` / `tokio-stream` |
+| ⚡ Erlang | [`../erlang/`](../erlang/) | `cats-effect Fiber` → 进程；`Supervisor`（cats-effect）→ OTP `supervisor` 行为；`MapRef` 分片 → ETS；Actor 路由 → `gen_server` + 消息 |
+
+横向速查表：[`../LANGUAGE_COMPARISON.md`](../LANGUAGE_COMPARISON.md) —— 12 张对照表把 Scala 的抽象一一映射到另外 4 门。
+
+> **对照建议**：读完 `07_TypeClassStyle` + `14_FunctorApplicativeMonad` → 回头看 Haskell `02_TypeClassAndMonad`；
+> 读完 `17_IOBasics` → `26_CatsEffectIOApp` → 对照 Haskell `04_IOAndSideEffects`、Elixir `06_genserver_agent_task`、Rust `08_async_streams_tokio`；
+> 读完 `22_TaglessUserService` / `30_TaglessCatsEffect` → 对照 Haskell `21_EffectSystemPatterns`；
+> 读完 `78~80`（Doobie）→ 对照 Elixir `09_ecto_repo_changeset_multi`；
+> 读完 `akka/` 系列 → 对照 Erlang `03_actor_model` / `04_gen_server_counter`。

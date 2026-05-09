@@ -235,6 +235,7 @@ functioallanguagedemo01/
 │   ├── run.sh                          # Elixir Demo 一键运行脚本
 │   └── ELIXIR_FP_ROADMAP.md            # Elixir FP 学习路线图
 ├── LANGUAGE_COMPARISON.md              # 多语言跨语言对照表
+├── LANGUAGE_USE_CASES.md               # 四种语言应用场景与 Demo 索引
 └── README.md
 ```
 

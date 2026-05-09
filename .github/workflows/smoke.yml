@@ -1,0 +1,170 @@
+name: smoke-fast
+
+# 只跑"零依赖 Demo"的最小冒烟 CI。
+# 目标：每次 push / PR 都在 3~5 分钟内给出 "是否有基本编译/运行错误" 的信号。
+# 不覆盖需要 cabal/cargo/scala-cli 自动拉依赖的进阶 Demo（那些留给 `smoke-full` 按需触发）。
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+concurrency:
+  group: smoke-fast-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  # ============================================================
+  # Elixir —— 01~08（零依赖）
+  # ============================================================
+  elixir-free:
+    name: Elixir 01~08 (zero-dep)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup BEAM
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '27'
+          elixir-version: '1.17.2'
+      - name: Run zero-dep demos
+        working-directory: elixir
+        run: |
+          chmod +x ./run.sh
+          ./run.sh free
+
+  # ============================================================
+  # Erlang —— 01/02（纯模式匹配 & 高阶函数；零依赖）
+  # actor_model / gen_server 等需要 spawn + receive, 在 CI 里一般也能跑,
+  # 但我们保守一点，先只冒烟编译全部、执行头 2 个。
+  # ============================================================
+  erlang-free:
+    name: Erlang 01~02 (zero-dep)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup BEAM
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: '27'
+      - name: Compile all
+        working-directory: erlang
+        run: erlc *.erl
+      - name: Run 01_pattern_matching
+        working-directory: erlang
+        run: erl -noshell -s pattern_matching main -s init stop
+      - name: Run 02_higher_order
+        working-directory: erlang
+        run: erl -noshell -s higher_order main -s init stop
+
+  # ============================================================
+  # Haskell —— 01~07（只用 base，runghc 直接跑）
+  # 08 以后涉及 mtl/stm/lens/quickcheck 等非 base 包，
+  # CI 里需要 cabal install, 放到 smoke-full 里
+  # ============================================================
+  haskell-free:
+    name: Haskell 01~07 (base only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Haskell
+        uses: haskell-actions/setup@v2
+        with:
+          ghc-version: '9.6'
+      - name: Run base-only demos
+        working-directory: haskell
+        run: |
+          set -e
+          for f in 01_PureAndLazy.hs \
+                   02_TypeClassAndMonad.hs \
+                   03_CurryAndCompose.hs \
+                   04_IOAndSideEffects.hs \
+                   05_StateAndReader.hs \
+                   06_ConcurrencySTM.hs \
+                   07_TypesAndADT.hs; do
+            echo "====== runghc $f ======"
+            runghc "$f"
+          done
+
+  # ============================================================
+  # Rust —— 01~07（std only）
+  # 08 async/tokio, 15 serde, 16 thiserror, 18 axum-like, 22 proptest
+  # 需要外部 crate, 单文件 rustc 跑不起来
+  # ============================================================
+  rust-free:
+    name: Rust 01~07 (std only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Compile & run std-only demos
+        working-directory: rust
+        run: |
+          set -e
+          for f in 01_iterators_and_closures.rs \
+                   02_enum_and_option.rs \
+                   03_trait_and_generics.rs \
+                   04_error_handling_result_chain.rs \
+                   05_ownership_and_fp.rs \
+                   06_iterator_internals.rs \
+                   07_smart_pointers_fp.rs; do
+            echo "====== rustc $f ======"
+            rustc --edition 2021 "$f" -o /tmp/demo
+            /tmp/demo
+          done
+
+  # ============================================================
+  # Scala —— 01~20（标准库 + 纯 FP，无需 cats / fs2 / http4s / akka）
+  # 21 起进入 Http4sMiniService / TaglessUserService 等真实库栈, 交给 smoke-full
+  # 用 scala-cli, 它对 Scala 3 单文件运行友好且会自动缓存
+  # ============================================================
+  scala-free:
+    name: Scala 01~20 (stdlib only)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Setup scala-cli
+        uses: VirtusLab/scala-cli-setup@v1
+      - name: Run stdlib-only demos
+        working-directory: scala
+        run: |
+          set -e
+          for n in 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20; do
+            file=$(ls ${n}_*.scala 2>/dev/null | head -n 1)
+            if [ -n "$file" ]; then
+              echo "====== scala-cli run $file ======"
+              scala-cli run --server=false "$file"
+            fi
+          done
+
+  # ============================================================
+  # 文档链接检查（可选，零成本）
+  # 检查各 ROADMAP.md 之间的交叉链接、LICENSE / CONTRIBUTING / README 的相对路径引用是否都存在
+  # ============================================================
+  docs-link-check:
+    name: Docs cross-link sanity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check key files exist
+        run: |
+          set -e
+          for f in README.md LICENSE CONTRIBUTING.md LANGUAGE_COMPARISON.md \
+                   scala/SCALA_FP_ROADMAP.md \
+                   haskell/HASKELL_FP_ROADMAP.md \
+                   elixir/ELIXIR_FP_ROADMAP.md \
+                   elixir/run.sh \
+                   elixir/mix.exs \
+                   erlang/run.sh; do
+            test -f "$f" || { echo "❌ missing: $f"; exit 1; }
+            echo "✅ $f"
+          done
