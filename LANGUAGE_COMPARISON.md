@@ -186,3 +186,29 @@ Erlang 和 Elixir 共享 BEAM 运行时，很多抽象底层完全一致，但 E
 | [`haskell/46_ParallelStrategies.hs`](./haskell/46_ParallelStrategies.hs) | 声明式并行（金融定价 / 风险计算 / 科学模拟的多核加速；6× 实测加速比） | 第 9 节 **并发/并行**（这里强调的是并行，不是并发）|
 | [`haskell/47_MinimalFRP.hs`](./haskell/47_MinimalFRP.hs) | 函数式响应式编程（Reflex / Yampa / RxJS 的古典内核） | 第 2 节 **Functor / Applicative**（Behavior 即 Reader Time）|
 | [`haskell/48_CsvToJsonETL.hs`](./haskell/48_CsvToJsonETL.hs) | 数据工程 ETL（CSV→JSON 流水线 + 列类型推导 + 错误定位） | 第 6 节 **ADT** + 第 10 节 **递归下降解析** |
+
+---
+
+## 🧩 生态盘点：学完 demo 之后玩什么
+
+学完抽象和 demo 之后，对应语言的"真实世界项目"盘点（SDK / 开源项目 / 应用场景）：
+
+| 语言 | 生态盘点 |
+|---|---|
+| 🟢 Haskell | [`haskell/HASKELL_ECOSYSTEM.md`](./haskell/HASKELL_ECOSYSTEM.md)（Tidal Cycles / Servant / Pandoc / Plutus 等 25 个项目） |
+| 🟣 Scala | [`scala/SCALA_ECOSYSTEM.md`](./scala/SCALA_ECOSYSTEM.md)（Spark / Kafka / Akka / cats-effect / Chisel 等 25 个项目） |
+| 🦀 Rust | [`rust/RUST_ECOSYSTEM.md`](./rust/RUST_ECOSYSTEM.md)（ripgrep / tokio / Pingora / Solana / candle 等 25 个项目） |
+| ⚡ Erlang | [`erlang/ERLANG_ECOSYSTEM.md`](./erlang/ERLANG_ECOSYSTEM.md)（RabbitMQ / EMQX / WhatsApp / CouchDB 等 25 个项目） |
+| 💧 Elixir | [`elixir/ELIXIR_ECOSYSTEM.md`](./elixir/ELIXIR_ECOSYSTEM.md)（Phoenix LiveView / Nx+Bumblebee / Livebook / Nerves 等 25 个项目） |
+
+---
+
+## 🗺 其他函数式语言 & 后续扩展计划
+
+除了本仓库已覆盖的 6 门主力外，还有一批值得了解 / 规划中的函数式语言：
+
+| 文档 | 内容 |
+|---|---|
+| [`OTHER_FP_LANGUAGES.md`](./OTHER_FP_LANGUAGES.md) | OCaml / F# / Clojure / Racket / Elm / PureScript / Idris / Lean / Roc / Gleam 等 20+ 语言分梯队盘点 |
+| [`ocaml/ROADMAP.md`](./ocaml/ROADMAP.md) | OCaml 40+ demo 规划（Jane Street / Facebook Flow / MirageOS 风格，等待 `opam` 环境就绪后开工） |
+| [`clojure/ROADMAP.md`](./clojure/ROADMAP.md) | Clojure 40+ demo 规划（Metabase / Datomic / Nubank 风格，`clojure` CLI 已就绪可开工） |
