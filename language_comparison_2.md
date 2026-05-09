@@ -17,6 +17,11 @@
 | **高可靠后端 / 数据管道** | Mercury（银行 API）、Hasura（GraphQL 引擎） |
 | **研究与规范** | 论文算法原型、类型系统研究 |
 
+📎 **本仓库对应 demo**：
+- [`haskell/42_OptionPricingDSL.hs`](./haskell/42_OptionPricingDSL.hs) — 用 GADT 把期权合约建模成 DSL，多个解释器（Black-Scholes 解析解、蒙特卡洛数值解）共享同一份 AST，对应上表**金融/量化**格。
+- [`haskell/43_TinyLangCompiler.hs`](./haskell/43_TinyLangCompiler.hs) — 单文件串起 lexer → 递归下降 parser → Hindley-Milner 类型推导 → 闭包求值器，对应**编译器 / DSL / 语言工具**格。
+- [`haskell/44_AutoDiff.hs`](./haskell/44_AutoDiff.hs) — 20 行核心代码实现前向模式自动微分（对偶数法 + Type class 重载），对应**研究与规范**格，也是 PyTorch/JAX autograd 的底层原理。
+
 **不适合**：需要快速堆业务、团队招人困难、依赖成熟 SDK 生态（如手游、移动端）的场景。
 
 ---
@@ -93,3 +98,21 @@
 > 💡 顺带一提：本项目 [LANGUAGE_COMPARISON.md](/Users/jiangdadong/CodeBuddy/functioallanguagedemo01/LANGUAGE_COMPARISON.md) 里有更偏"语法/概念"层面的对比，而上面这份是"**商业/工程场景**"层面的补充，两者互为正交。
 
 如果你想让我把这段"应用场景"落到某个具体文件里（比如追加到根 `README.md` 的"选型建议"一节、或 `LANGUAGE_COMPARISON.md` 末尾），**请明确告诉我写到哪个文件的哪一节** —— 按 CLAUDE.md 守则 1 & 3 [[memory:83vkcsgs]]，我不会擅自动文件。
+
+---
+
+## 📎 附录：Haskell 行业场景 demo 速查（42~48）
+
+上面四种语言对比偏"商业/工程画像"；下面这张表把 **Haskell 在工业界最有代表性的 7 个缩影**列出来，全部在本仓库 `haskell/` 目录下可直接跑（46 号需 `cabal run`）。
+
+| Demo | 行业场景 | 一句话亮点 |
+|---|---|---|
+| [`haskell/42_OptionPricingDSL.hs`](./haskell/42_OptionPricingDSL.hs) | 金融衍生品定价（Standard Chartered / Barclays / IOHK 范式） | 同一份 GADT 合约树喂给 Black-Scholes 解析解 + 蒙特卡洛数值解，交叉验证偏差 <1% |
+| [`haskell/43_TinyLangCompiler.hs`](./haskell/43_TinyLangCompiler.hs) | 编译器 / DSL（GHC / Pandoc / Elm / shellcheck 缩影） | 单文件串起 lexer → parser → Hindley-Milner 类型推导 → 闭包求值 |
+| [`haskell/44_AutoDiff.hs`](./haskell/44_AutoDiff.hs) | 机器学习 / 科学计算（PyTorch / JAX 底层思想） | 20 行核心代码用对偶数 + 类型类重载实现自动微分 |
+| [`haskell/45_UTXOLedger.hs`](./haskell/45_UTXOLedger.hs) | 区块链账本（Cardano / Plutus / Bitcoin 的 UTXO 模型） | 含 FNV-1a 哈希指针 + Merkle 根 + 双花/错签名/不平衡三类反例的拒绝 |
+| [`haskell/46_ParallelStrategies.hs`](./haskell/46_ParallelStrategies.hs) | 声明式并行（金融定价 / 风险计算的多核加速） | par/Strategies/Eval 三种用法对比，fib 38 实测 6.1× 加速 |
+| [`haskell/47_MinimalFRP.hs`](./haskell/47_MinimalFRP.hs) | 函数式响应式编程（Reflex / Yampa / RxJS 的古典内核） | Behavior=Time→a + Event=[(Time,a)] 的 Conal Elliott 1997 范式 |
+| [`haskell/48_CsvToJsonETL.hs`](./haskell/48_CsvToJsonETL.hs) | 数据工程 ETL（cassava + aeson 的纯 base 替身） | 手写 CSV parser + 列类型推导 + transform 管道 + JSON encoder + 行列错误定位 |
+
+> 配套深入路线：[`haskell/HASKELL_FP_ROADMAP.md`](./haskell/HASKELL_FP_ROADMAP.md) 的"批次 5"和"批次 6"两节。

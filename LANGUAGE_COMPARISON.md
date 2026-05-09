@@ -71,7 +71,7 @@ Erlang 和 Elixir 共享 BEAM 运行时，很多抽象底层完全一致，但 E
 
 | 概念 | Haskell | Scala | Rust | Erlang | Elixir |
 |---|---|---|---|---|---|
-| 代数数据类型 | `data`、sum + product (H-07) | `sealed trait` + `case class` (S-02) | `enum` + `struct` (R-02) | atom + tuple，靠约定 | `defstruct` + atom tag 约定 (X-02) |
+| 代数数据类型 | `data`、sum + product、GADT (H-07, H-42, H-43) | `sealed trait` + `case class` (S-02) | `enum` + `struct` (R-02) | atom + tuple，靠约定 | `defstruct` + atom tag 约定 (X-02) |
 | 模式匹配 | ✅ 原生 | ✅ `match` | ✅ `match` | ✅ 函数头匹配 (E-01) | ✅ 函数头 + `case` / `with` (X-01) |
 | Type class / Trait | ✅ `class`/`instance` (H-02) | implicit / `given` (S-07) | `trait` (R-03) | ❌ 无静态类型约束 | `defprotocol` + `defimpl`（运行时多态，X-02） |
 | Phantom / Typestate | phantom type + GADT (H-15) | phantom / sealed (S-09) | `PhantomData<T>` (R-09) | ❌ | ❌（可用 atom tag + 宏近似） |
@@ -86,7 +86,7 @@ Erlang 和 Elixir 共享 BEAM 运行时，很多抽象底层完全一致，但 E
 |---|---|---|---|---|---|
 | 把"副作用"当值 | `IO a` / `ExceptT`/`ReaderT` (H-08) | `IO[A]` cats-effect (S-26) | 没有原生抽象，手写 tagless | 没有抽象，靠进程隔离 | 同 Erlang；靠进程 + `with` + Telemetry 事件流 (X-13) |
 | Free Monad | `Free f a` (H-11) | `Free[F, A]` | 少见，可用 `enum` 近似 | 不适用 | 不常用（有 `witchcraft` 这类实验库） |
-| Tagless Final | `class MonadDB m` (H-21) | `trait UserRepo[F[_]]` (S-22/30) | `trait Store` + generic | 不适用 | `@behaviour` + `@callback`（运行时版 tagless，X-02） |
+| Tagless Final | `class MonadDB m` / GADT + 多解释器 (H-21, H-42) | `trait UserRepo[F[_]]` (S-22/30) | `trait Store` + generic | 不适用 | `@behaviour` + `@callback`（运行时版 tagless，X-02） |
 | Algebraic Effects | polysemy / effectful / fused (H-26) | effect systems 生态 | 第三方 `keter`/自建 | 不适用 | 不适用 |
 
 ---
@@ -171,3 +171,18 @@ Erlang 和 Elixir 共享 BEAM 运行时，很多抽象底层完全一致，但 E
 | 🦀 Rust | [`rust/`](./rust/)（Demo 25 篇，roadmap 文档尚未独立） |
 | ⚡ Erlang | [`erlang/`](./erlang/)（Demo 27 篇，roadmap 文档尚未独立） |
 
+---
+
+## 🏭 行业场景 demo 索引（Haskell 42~48）
+
+前面 12 张表都是按"抽象"组织的；这里反过来按"行业场景"索引，给到 Haskell 在工业界最具代表性的 7 个缩影 demo。每份原则上都是单文件、纯 `base`、`runghc` 直接可跑（46 号是唯一例外，需 `cabal run` 自动拉 `parallel` 包）。
+
+| Demo | 行业场景 | 映射到上表哪一格 |
+|---|---|---|
+| [`haskell/42_OptionPricingDSL.hs`](./haskell/42_OptionPricingDSL.hs) | 金融衍生品定价（Standard Chartered / Barclays / IOHK 范式） | 第 6 节 **代数数据类型/GADT** + 第 7 节 **Tagless Final** |
+| [`haskell/43_TinyLangCompiler.hs`](./haskell/43_TinyLangCompiler.hs) | 编译器 / DSL / 语言工具（GHC / Pandoc / Elm / shellcheck 的缩影） | 第 6 节 **代数数据类型** + 第 10 节 **递归 & 抽象** |
+| [`haskell/44_AutoDiff.hs`](./haskell/44_AutoDiff.hs) | 机器学习 / 科学计算（PyTorch / JAX autograd 的底层原理） | 第 2 节 **Functor.map / Type class 重载** + 第 6 节 **类型系统** |
+| [`haskell/45_UTXOLedger.hs`](./haskell/45_UTXOLedger.hs) | 区块链账本（Cardano / Plutus / Bitcoin 的 UTXO 模型 + Merkle 根） | 第 6 节 **代数数据类型** + 第 1 节 **不可变性** |
+| [`haskell/46_ParallelStrategies.hs`](./haskell/46_ParallelStrategies.hs) | 声明式并行（金融定价 / 风险计算 / 科学模拟的多核加速；6× 实测加速比） | 第 9 节 **并发/并行**（这里强调的是并行，不是并发）|
+| [`haskell/47_MinimalFRP.hs`](./haskell/47_MinimalFRP.hs) | 函数式响应式编程（Reflex / Yampa / RxJS 的古典内核） | 第 2 节 **Functor / Applicative**（Behavior 即 Reader Time）|
+| [`haskell/48_CsvToJsonETL.hs`](./haskell/48_CsvToJsonETL.hs) | 数据工程 ETL（CSV→JSON 流水线 + 列类型推导 + 错误定位） | 第 6 节 **ADT** + 第 10 节 **递归下降解析** |
