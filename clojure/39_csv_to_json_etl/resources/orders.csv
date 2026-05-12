@@ -1,0 +1,9 @@
+order_id,user,product,qty,price,date
+O-001,Ada,apple,2,5.00,2024-01-15
+O-002,Bob,banana,3,3.00,2024-01-15
+O-003,Ada,cherry,1,8.00,2024-01-16
+O-004,Cy,apple,10,5.00,2024-01-16
+O-005,Ada, banana ,4,3.00,2024-01-17
+O-006,Bob,,2,8.00,2024-01-17
+O-007,Cy,cherry,abc,8.00,2024-01-18
+O-008,Ada,apple,1,5.00,2024-01-18

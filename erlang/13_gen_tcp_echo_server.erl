@@ -14,9 +14,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 13_gen_tcp_echo_server.erl
-%%%   erl -noshell -s gen_tcp_echo_server main -s init stop
+%%%   erl -noshell -s 13_gen_tcp_echo_server main -s init stop
 %%%-------------------------------------------------------------------
--module(gen_tcp_echo_server).
+-module('13_gen_tcp_echo_server').
 -export([main/0, start_server/0, acceptor_loop/1, handler_loop/1, client/3]).
 
 %% ============================================================

@@ -4,7 +4,7 @@
 %%% Erlang 中的 fun (匿名函数) 和 lists 模块提供了强大的函数式操作。
 %%% 列表推导 (List Comprehension) 是 Erlang 最优雅的特性之一。
 %%%-------------------------------------------------------------------
--module(higher_order).
+-module('02_higher_order').
 -export([main/0, my_map/2, my_filter/2, my_foldl/3, compose/2]).
 
 main() ->

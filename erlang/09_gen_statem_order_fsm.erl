@@ -23,9 +23,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 09_gen_statem_order_fsm.erl
-%%%   erl -noshell -s gen_statem_order_fsm main -s init stop
+%%%   erl -noshell -s 09_gen_statem_order_fsm main -s init stop
 %%%-------------------------------------------------------------------
--module(gen_statem_order_fsm).
+-module('09_gen_statem_order_fsm').
 -behaviour(gen_statem).
 
 %% 对外 API

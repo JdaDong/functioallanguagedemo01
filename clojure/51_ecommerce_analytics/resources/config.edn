@@ -1,0 +1,6 @@
+{:server   {:port 35100
+            :join? false}
+ :datascript {:schema :ecom.store.datascript/schema}
+ :event-bus {:buffer 1024}
+ :workers  {:pool-size 4
+            :failure-rate 0.0}}

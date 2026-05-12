@@ -16,9 +16,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 15_link_monitor_trap_exit.erl
-%%%   erl -noshell -s link_monitor_trap_exit main -s init stop
+%%%   erl -noshell -s 15_link_monitor_trap_exit main -s init stop
 %%%-------------------------------------------------------------------
--module(link_monitor_trap_exit).
+-module('15_link_monitor_trap_exit').
 -export([main/0]).
 
 %% ============================================================

@@ -107,15 +107,16 @@ sample_vm_args() ->
     "-heart            # 启动 heart 子进程 监控 BEAM 自身\n".
 
 show() ->
+    io:setopts([{encoding, unicode}]),
     io:format("=== Erlang Demo 24: rebar3 项目骨架 ===~n~n"),
 
     io:format("-- 标准目录树 --~n"),
-    [io:format("~s~n", [L]) || L <- tree()],
+    [io:format("~ts~n", [L]) || L <- tree()],
 
-    io:format("~n-- rebar.config --~n~s~n", [sample_rebar_config()]),
-    io:format("-- src/myapp.app.src --~n~s~n", [sample_app_src()]),
-    io:format("-- config/sys.config --~n~s~n", [sample_sys_config()]),
-    io:format("-- config/vm.args --~n~s~n", [sample_vm_args()]),
+    io:format("~n-- rebar.config --~n~ts~n", [sample_rebar_config()]),
+    io:format("-- src/myapp.app.src --~n~ts~n", [sample_app_src()]),
+    io:format("-- config/sys.config --~n~ts~n", [sample_sys_config()]),
+    io:format("-- config/vm.args --~n~ts~n", [sample_vm_args()]),
 
     io:format("~n=== 重点理解 ===~n"),
     io:format("- rebar3 是 Erlang 事实标准工具, 等同 Rust 的 cargo / Scala 的 sbt~n"),

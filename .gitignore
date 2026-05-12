@@ -72,6 +72,52 @@ rust/demo
 erlang/*.beam
 erlang/ebin/
 erlang/_build/
+# fprof / eprof / dbg 等 profile / trace 输出（fprof.trace 单文件可达数十 MB）
+erlang/*.trace
+erlang/*.dump
+erlang/erl_crash.dump
+
+# ============================================================
+# OCaml —— dune 工程（每个 demo 子目录是一个 dune 包）
+# ============================================================
+ocaml/_build/
+ocaml/**/_build/
+ocaml/**/*.install
+ocaml/**/.merlin
+# opam 本地切换出来的 sandbox（如果用户 opam switch create .）
+ocaml/_opam/
+ocaml/**/_opam/
+# 单文件 ocamlfind / ocamlc 编译产出的中间文件
+ocaml/**/*.cmi
+ocaml/**/*.cmo
+ocaml/**/*.cmx
+ocaml/**/*.cmt
+ocaml/**/*.cmti
+ocaml/**/*.annot
+ocaml/**/*.o
+ocaml/**/*.a
+ocaml/**/*.so
+
+# ============================================================
+# Clojure —— deps.edn / Leiningen / shadow-cljs 工程
+# ============================================================
+# tools.deps（deps.edn）的本地类路径缓存
+clojure/**/.cpcache/
+# Leiningen / clojure CLI 编译产物
+clojure/**/target/
+clojure/**/classes/
+clojure/**/pom.xml
+clojure/**/pom.xml.asc
+clojure/**/*.jar
+# 编辑器 / 静态分析缓存（clojure-lsp、clj-kondo）
+clojure/**/.lsp/
+clojure/**/.clj-kondo/.cache/
+# nREPL 端口文件
+clojure/**/.nrepl-port
+# shadow-cljs / 前端构建
+clojure/**/.shadow-cljs/
+clojure/**/node_modules/
+clojure/**/public/js/
 
 # ============================================================
 # Elixir / Mix / BEAM —— Demo 09~15 通过 Mix.install 在本地缓存 hex 依赖

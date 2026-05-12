@@ -14,9 +14,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 05_supervisor_tree.erl
-%%%   erl -noshell -s supervisor_tree main -s init stop
+%%%   erl -noshell -s 05_supervisor_tree main -s init stop
 %%%-------------------------------------------------------------------
--module(supervisor_tree).
+-module('05_supervisor_tree').
 -behaviour(supervisor).
 
 -export([main/0, start_link/0, init/1]).

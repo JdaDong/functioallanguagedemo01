@@ -18,9 +18,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 16_logger_and_formatter.erl
-%%%   erl -noshell -s logger_and_formatter main -s init stop
+%%%   erl -noshell -s 16_logger_and_formatter main -s init stop
 %%%-------------------------------------------------------------------
--module(logger_and_formatter).
+-module('16_logger_and_formatter').
 -export([main/0]).
 
 %% ============================================================

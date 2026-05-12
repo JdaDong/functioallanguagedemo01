@@ -1700,7 +1700,7 @@ Elixir 和 Erlang 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，
 - 管道操作符 `|>`：把嵌套调用拍扁成从左到右的数据流
 - 模式匹配与绑定：`{:ok, value}` / `[head | tail]` / 解构赋值
 - 守卫 `when` 子句：在匹配层做类型与范围过滤
-- 对标：Erlang 01 `pattern_matching` / Haskell `where` + 管道 `&`
+- 对标：Erlang 01 `01_pattern_matching` / Haskell `where` + 管道 `&`
 
 #### `02_struct_protocol_behaviour.exs` — struct / protocol / behaviour 多态三件套
 - `defstruct`：带默认值的记录 + 编译期字段检查
@@ -1735,14 +1735,14 @@ Elixir 和 Erlang 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，
 - `Agent`：轻量状态持有，天然适合计数器、缓存、配置
 - `Task` / `Task.async` / `Task.await`：一次性异步任务
 - 状态 = fold 消息流，进程 = 最小隔离单元
-- 对标：Erlang 04 `gen_server_counter` / Akka Typed Actor / Scala cats-effect `Ref`
+- 对标：Erlang 04 `04_gen_server_counter` / Akka Typed Actor / Scala cats-effect `Ref`
 
 #### `07_supervisor_registry.exs` — Supervisor / DynamicSupervisor / Registry
 - 静态 `Supervisor`：固定子进程树 + `:one_for_one` / `:rest_for_one` 策略
 - `DynamicSupervisor`：按需动态拉起子进程（房间、会话、工作者）
 - `Registry`：进程名字服务（`{:via, Registry, {Reg, key}}`）
 - 按 key 查找进程 + 崩溃重启 + 自动清理的组合拳
-- 对标：Erlang 05 `supervisor_tree` / Akka Cluster Sharding
+- 对标：Erlang 05 `05_supervisor_tree` / Akka Cluster Sharding
 
 #### `08_task_supervisor_async_stream.exs` — Task.Supervisor × async_stream
 - `Task.Supervisor` 统一托管异步任务生命周期
@@ -1945,31 +1945,18 @@ scala-cli test scala/135_MUnitContextMapEndToEndSuite.scala
 
 ### Erlang
 ```bash
-# 需要安装 Erlang（建议 OTP 26+，OTP 28 需加 +no_error_module_mismatch 兼容前缀文件名）
+# 需要安装 Erlang（建议 OTP 26+；OTP 28 起文件名与模块名须一致，本仓库 module 名已带数字前缀，无需 workaround）
 cd erlang
 
-# 编译单个 Demo（OTP 28 起文件名与模块名须一致，故加 + 选项；老版本可忽略）
-erlc +no_error_module_mismatch 01_pattern_matching.erl
-# beam 文件会叫 01_pattern_matching.beam，但加载时找 pattern_matching，所以复制一份同模块名
-cp 01_pattern_matching.beam pattern_matching.beam
-erl -noshell -s pattern_matching main -s init stop
+# 推荐：用脚本一键编译并运行（参数为 demo 编号）
+./run.sh 01     # 跑 01_pattern_matching
+./run.sh 04     # 跑 04_gen_server_counter
+# 不带参数则跑全部
+./run.sh
 
-# 其它 Demo 编号 → 模块名对照：
-# 02_higher_order              → higher_order
-# 03_actor_model               → actor_model
-# 04_gen_server_counter        → gen_server_counter
-# 05_supervisor_tree           → supervisor_tree
-# 06_ets_and_state             → ets_and_state
-# 07_distributed_nodes         → distributed_nodes
-# 08_property_testing_proper   → property_testing_proper
-# 09_gen_statem_order_fsm      → gen_statem_order_fsm
-# 10_binary_pattern_matching   → binary_pattern_matching
-# 11_mnesia_transactional_store→ mnesia_transactional_store
-# 12_hot_code_upgrade          → hot_code_upgrade
-# 13_gen_tcp_echo_server       → gen_tcp_echo_server
-# 14_selective_receive_mailbox → selective_receive_mailbox
-# 15_link_monitor_trap_exit    → link_monitor_trap_exit
-# 16_logger_and_formatter      → logger_and_formatter
+# 也可以手动编译运行单个 demo（module 名 = 文件名去掉 .erl，含数字前缀，需用单引号括起来）
+erlc 01_pattern_matching.erl
+erl -noshell -s '01_pattern_matching' main -s init stop
 ```
 
 ### Haskell
@@ -2169,10 +2156,10 @@ elixir 15_mix_umbrella_releases.exs
        用最轻的语法拍扁，业务流程写起来像纯数据管道
    Elixir 06 (GenServer / Agent / Task)
      → 看 OTP 行为三件套如何把“状态 = fold 消息流”“进程 = 最小隔离单元”
-       落成可直接投产的 API（对标 Erlang 04 `gen_server_counter` / Akka Typed Actor）
+       落成可直接投产的 API（对标 Erlang 04 `04_gen_server_counter` / Akka Typed Actor）
    Elixir 07 (Supervisor / DynamicSupervisor / Registry)
      → 看监督树 + 动态拉子进程 + key→pid 注册如何组合成
-       “崩溃即重启、按需开房间、天然可命名”的并发骨架（对标 Erlang 05 `supervisor_tree`）
+       “崩溃即重启、按需开房间、天然可命名”的并发骨架（对标 Erlang 05 `05_supervisor_tree`）
    这三步合起来差不多就覆盖了 Elixir 最独特的心智模型：
      管道 / with 写业务 × OTP 行为抽象 × 监督树可靠性
 

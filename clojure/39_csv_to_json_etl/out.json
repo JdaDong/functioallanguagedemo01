@@ -1,0 +1,107 @@
+{
+  "summary" : {
+    "total-orders" : 6,
+    "total-revenue" : 94.0,
+    "by-user" : {
+      "Ada" : {
+        "n" : 4,
+        "sum" : 35.0
+      },
+      "Bob" : {
+        "n" : 1,
+        "sum" : 9.0
+      },
+      "Cy" : {
+        "n" : 1,
+        "sum" : 50.0
+      }
+    },
+    "by-product" : {
+      "apple" : {
+        "n" : 3,
+        "qty" : 13,
+        "revenue" : 65.0
+      },
+      "banana" : {
+        "n" : 2,
+        "qty" : 7,
+        "revenue" : 21.0
+      },
+      "cherry" : {
+        "n" : 1,
+        "qty" : 1,
+        "revenue" : 8.0
+      }
+    }
+  },
+  "rejected" : [ {
+    "row" : {
+      "order_id" : "O-006",
+      "user" : "Bob",
+      "product" : "",
+      "qty" : "2",
+      "price" : "8.00",
+      "date" : "2024-01-17"
+    },
+    "error" : "missing product"
+  }, {
+    "row" : {
+      "order_id" : "O-007",
+      "user" : "Cy",
+      "product" : "cherry",
+      "qty" : "abc",
+      "price" : "8.00",
+      "date" : "2024-01-18"
+    },
+    "error" : "qty not a number: abc"
+  } ],
+  "good-rows" : [ {
+    "order-id" : "O-001",
+    "user" : "Ada",
+    "product" : "apple",
+    "qty" : 2,
+    "price" : 5.00,
+    "date" : "2024-01-15",
+    "subtotal" : 10.0
+  }, {
+    "order-id" : "O-002",
+    "user" : "Bob",
+    "product" : "banana",
+    "qty" : 3,
+    "price" : 3.00,
+    "date" : "2024-01-15",
+    "subtotal" : 9.0
+  }, {
+    "order-id" : "O-003",
+    "user" : "Ada",
+    "product" : "cherry",
+    "qty" : 1,
+    "price" : 8.00,
+    "date" : "2024-01-16",
+    "subtotal" : 8.0
+  }, {
+    "order-id" : "O-004",
+    "user" : "Cy",
+    "product" : "apple",
+    "qty" : 10,
+    "price" : 5.00,
+    "date" : "2024-01-16",
+    "subtotal" : 50.0
+  }, {
+    "order-id" : "O-005",
+    "user" : "Ada",
+    "product" : "banana",
+    "qty" : 4,
+    "price" : 3.00,
+    "date" : "2024-01-17",
+    "subtotal" : 12.0
+  }, {
+    "order-id" : "O-008",
+    "user" : "Ada",
+    "product" : "apple",
+    "qty" : 1,
+    "price" : 5.00,
+    "date" : "2024-01-18",
+    "subtotal" : 5.0
+  } ]
+}

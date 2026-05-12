@@ -17,9 +17,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 10_binary_pattern_matching.erl
-%%%   erl -noshell -s binary_pattern_matching main -s init stop
+%%%   erl -noshell -s 10_binary_pattern_matching main -s init stop
 %%%-------------------------------------------------------------------
--module(binary_pattern_matching).
+-module('10_binary_pattern_matching').
 -export([main/0]).
 
 %% ============================================================

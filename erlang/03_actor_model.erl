@@ -5,10 +5,11 @@
 %%% 这是函数式编程与并发编程的完美结合 (Actor Model)。
 %%% 每个进程是独立的，不共享状态，只通过消息通信。
 %%%-------------------------------------------------------------------
--module(actor_model).
+-module('03_actor_model').
 -export([main/0, counter/1, calculator/0, ping_pong/0]).
 
 main() ->
+    io:setopts([{encoding, unicode}]),
     io:format("=== Actor 模型: 计数器 ===~n"),
     
     %% 启动一个计数器进程
@@ -73,7 +74,7 @@ calculator() ->
             Calc ! {Op, self()},
             receive
                 {result, R} -> io:format("  ~p = ~p~n", [Op, R]);
-                {error, E}  -> io:format("  ~p => 错误: ~s~n", [Op, E])
+                {error, E}  -> io:format("  ~p => 错误: ~ts~n", [Op, E])
             after 1000 -> io:format("  超时~n")
             end
         end,

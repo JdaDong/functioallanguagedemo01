@@ -1,0 +1,4 @@
+(executable
+ (name main)
+ (libraries core async async_rpc_kernel)
+ (preprocess (pps ppx_jane)))

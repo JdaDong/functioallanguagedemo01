@@ -4,11 +4,12 @@
 %%% Erlang 的模式匹配是语言的核心——函数参数、变量绑定、消息传递都依赖模式匹配。
 %%% 递归是 Erlang 中替代循环的主要方式（Erlang 没有 for/while 循环）。
 %%%-------------------------------------------------------------------
--module(pattern_matching).
--export([main/0, factorial/1, fibonacci/1, list_sum/1, 
+-module('01_pattern_matching').
+-export([main/0, factorial/1, fibonacci/1, list_sum/1,
          quicksort/1, describe_temp/1, zip/2]).
 
 main() ->
+    io:setopts([{encoding, unicode}]),
     io:format("=== 基础模式匹配 ===~n"),
     
     %% 变量绑定就是模式匹配
@@ -42,7 +43,7 @@ main() ->
     
     io:format("~n=== 守卫表达式 (Guards) ===~n"),
     lists:foreach(
-        fun(T) -> io:format("~p°C -> ~s~n", [T, describe_temp(T)]) end,
+        fun(T) -> io:format("~p°C -> ~ts~n", [T, describe_temp(T)]) end,
         [-10, 0, 15, 25, 35, 42]
     ),
     

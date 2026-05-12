@@ -73,6 +73,7 @@ calling_erlang_from_elixir() ->
 %% 运行器
 %% ============================================================
 run() ->
+    io:setopts([{encoding, unicode}]),
     io:format("=== Erlang Demo 25: Elixir ↔ Erlang 互操作 ===~n"),
 
     %% 跑一下 Erlang 版
@@ -84,10 +85,10 @@ run() ->
     io:format("  inc(3); inc(4); get() = ~p~n", [N]),
 
     io:format("~n-- 同等 Elixir 源码 --~n"),
-    io:format("~s~n", [elixir_version_snippet()]),
+    io:format("~ts~n", [elixir_version_snippet()]),
 
-    io:format("-- Erlang → Elixir --~n~s~n", [calling_elixir_from_erlang()]),
-    io:format("-- Elixir → Erlang --~n~s~n", [calling_erlang_from_elixir()]),
+    io:format("-- Erlang → Elixir --~n~ts~n", [calling_elixir_from_erlang()]),
+    io:format("-- Elixir → Erlang --~n~ts~n", [calling_erlang_from_elixir()]),
 
     io:format("~n=== 重点理解 ===~n"),
     io:format("- BEAM 家族: Erlang / Elixir / Gleam / LFE 全部编成 .beam, 互通~n"),

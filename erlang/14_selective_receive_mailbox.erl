@@ -17,9 +17,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 14_selective_receive_mailbox.erl
-%%%   erl -noshell -s selective_receive_mailbox main -s init stop
+%%%   erl -noshell -s 14_selective_receive_mailbox main -s init stop
 %%%-------------------------------------------------------------------
--module(selective_receive_mailbox).
+-module('14_selective_receive_mailbox').
 -export([main/0]).
 
 %% ============================================================

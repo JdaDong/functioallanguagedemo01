@@ -14,9 +14,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 04_gen_server_counter.erl
-%%%   erl -noshell -s gen_server_counter main -s init stop
+%%%   erl -noshell -s 04_gen_server_counter main -s init stop
 %%%-------------------------------------------------------------------
--module(gen_server_counter).
+-module('04_gen_server_counter').
 -behaviour(gen_server).
 
 -compile({no_auto_import, [get/1]}).

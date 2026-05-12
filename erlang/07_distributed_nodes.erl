@@ -10,16 +10,16 @@
 %%%   * 节点 B 通过 {ProcName, NodeA} 向它发消息
 %%%
 %%% 运行方式 A（单 shell，演示核心 API，不真的起多节点）：
-%%%   erl -sname local -noshell -s distributed_nodes single_node_demo -s init stop
+%%%   erl -sname local -noshell -s 07_distributed_nodes single_node_demo -s init stop
 %%%
 %%% 运行方式 B（真跨节点，开两个终端）：
 %%%   终端 1:  erl -sname a -setcookie demo
-%%%           (a@host)1> distributed_nodes:echo_server().
+%%%           (a@host)1> '07_distributed_nodes':echo_server().
 %%%   终端 2:  erl -sname b -setcookie demo
-%%%           (b@host)1> distributed_nodes:ping(a@'<your-host>').
+%%%           (b@host)1> '07_distributed_nodes':ping(a@'<your-host>').
 %%%
 %%%-------------------------------------------------------------------
--module(distributed_nodes).
+-module('07_distributed_nodes').
 -export([single_node_demo/0, echo_server/0, echo_loop/0, ping/1]).
 
 %% ====================== 单节点演示 ======================
@@ -56,7 +56,7 @@ single_node_demo() ->
     ok.
 
 %% ====================== Echo Server ======================
-%% 真跨节点时执行: distributed_nodes:echo_server() 会注册一个全局名
+%% 真跨节点时执行: '07_distributed_nodes':echo_server() 会注册一个全局名
 
 echo_server() ->
     Pid = spawn(fun echo_loop/0),

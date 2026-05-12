@@ -18,7 +18,7 @@
 %%%   b) 并发读 (多个进程一起 lookup)
 %%%   c) match / select 函数式查询
 %%%-------------------------------------------------------------------
--module(ets_and_state).
+-module('06_ets_and_state').
 -export([main/0]).
 
 main() ->

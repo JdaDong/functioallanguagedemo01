@@ -20,9 +20,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 12_hot_code_upgrade.erl
-%%%   erl -noshell -s hot_code_upgrade main -s init stop
+%%%   erl -noshell -s 12_hot_code_upgrade main -s init stop
 %%%-------------------------------------------------------------------
--module(hot_code_upgrade).
+-module('12_hot_code_upgrade').
 -export([main/0, start/0, incr/1, get/1, upgrade/2, stop/1, loop/1]).
 
 -compile({no_auto_import, [get/1]}).

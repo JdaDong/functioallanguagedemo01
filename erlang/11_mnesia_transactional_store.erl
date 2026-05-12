@@ -17,9 +17,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 11_mnesia_transactional_store.erl
-%%%   erl -noshell -s mnesia_transactional_store main -s init stop
+%%%   erl -noshell -s 11_mnesia_transactional_store main -s init stop
 %%%-------------------------------------------------------------------
--module(mnesia_transactional_store).
+-module('11_mnesia_transactional_store').
 
 %% 包含 QLC 查询宏
 -include_lib("stdlib/include/qlc.hrl").

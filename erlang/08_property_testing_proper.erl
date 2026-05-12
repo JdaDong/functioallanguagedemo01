@@ -13,9 +13,9 @@
 %%%
 %%% 运行：
 %%%   erl -compile 08_property_testing_proper.erl
-%%%   erl -noshell -s property_testing_proper main -s init stop
+%%%   erl -noshell -s 08_property_testing_proper main -s init stop
 %%%-------------------------------------------------------------------
--module(property_testing_proper).
+-module('08_property_testing_proper').
 -export([main/0]).
 
 %% ============================================================

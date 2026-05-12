@@ -1,0 +1,6 @@
+{:paths ["."]
+ :deps {org.clojure/clojure {:mvn/version "1.12.0"}
+        metosin/malli       {:mvn/version "0.20.1"}}
+
+ :aliases
+ {:run {:main-opts ["-m" "demo46"]}}}
