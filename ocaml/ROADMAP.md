@@ -1,7 +1,7 @@
 # OCaml 40+ Demo 学习路线图
 
 > 对齐 [`haskell/HASKELL_FP_ROADMAP.md`](../haskell/HASKELL_FP_ROADMAP.md) 的粒度。
-> 状态图例：⏳ 待做 / 🚧 进行中 / ✅ 完成。当前全部 ⏳。
+> 状态图例：⏳ 待做 / 🚧 进行中 / ✅ 完成 / ⏭️ 跳过。当前主线 ✅ 已完成（38/40 demo，38/39 跳过外部依赖庞大的 mirage / irmin）。
 
 ---
 
@@ -9,14 +9,14 @@
 
 | # | Demo | 卖点 | 状态 |
 |---|---|---|---|
-| 01 | basics_and_adt | `let` / `match` / `type` 三件套，打印 Fibonacci | ⏳ |
-| 02 | pattern_matching | 深度嵌套模式、`when` 守卫、`as` 绑定 | ⏳ |
-| 03 | higher_order_and_currying | `|>` / `@@` / 偏应用 | ⏳ |
-| 04 | variants_and_records | 标签型 variant、行多态 record | ⏳ |
-| 05 | exceptions_vs_result | `exception` vs `('a, 'b) result`，何时用哪个 | ⏳ |
-| 06 | tail_recursion | `@tail_mod_cons`，对比 Haskell 惰性 | ⏳ |
-| 07 | mutable_refs_and_arrays | `ref` / `mutable field` / `Array`，ML 的可变一面 | ⏳ |
-| 08 | io_and_channels | `Printf` / `Scanf` / `in_channel`，最小文件 IO | ⏳ |
+| 01 | basics_and_adt | `let` / `match` / `type` 三件套，打印 Fibonacci | ✅ |
+| 02 | pattern_matching | 深度嵌套模式、`when` 守卫、`as` 绑定 | ✅ |
+| 03 | higher_order_and_currying | `|>` / `@@` / 偏应用 | ✅ |
+| 04 | variants_and_records | 标签型 variant、行多态 record | ✅ |
+| 05 | exceptions_vs_result | `exception` vs `('a, 'b) result`，何时用哪个 | ✅ |
+| 06 | tail_recursion | `@tail_mod_cons`，对比 Haskell 惰性 | ✅ |
+| 07 | mutable_refs_and_arrays | `ref` / `mutable field` / `Array`，ML 的可变一面 | ✅ |
+| 08 | io_and_channels | `Printf` / `Scanf` / `in_channel`，最小文件 IO | ✅ |
 
 ---
 

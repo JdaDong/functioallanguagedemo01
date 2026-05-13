@@ -1,8 +1,8 @@
 # 🧠 函数式编程多语言学习手册
 
-> **用 5 种语言，178 个经典 Demo，系统学习函数式编程核心思想。**
+> **用 8 种语言、485+ 个经典 Demo，系统学习函数式编程核心思想。**
 
-本项目精选 **Scala、Akka、Erlang、Elixir、Haskell、Rust** 六种各具特色的编程语言，通过实战代码演示函数式编程中最重要的概念。每个 Demo 都配有详细的中文注释，适合对照学习、理解不同语言对同一思想的表达方式。其中 Erlang 与 Elixir 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，一起形成 BEAM 家族的两种不同编程风格。
+本项目精选 **Scala、Akka、Erlang、Elixir、Haskell、Rust、OCaml、Clojure、Racket** 八种各具特色的编程语言（其中 Akka 是 Scala 上的 Actor 框架），通过实战代码演示函数式编程中最重要的概念。每个 Demo 都配有详细的中文注释，适合对照学习、理解不同语言对同一思想的表达方式。其中 Erlang 与 Elixir 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，一起形成 BEAM 家族的两种不同编程风格；OCaml 与 Haskell 同属 ML 家族但偏严格求值；Clojure 与 Racket 同属 Lisp 家族但走两条路线 —— Clojure 是 JVM 上的工业实用主义派，Racket 是 PLT 学派"语言工作台"派。
 
 目前 `Scala` 部分已经从基础语法一路补充到：**错误处理、尾递归、惰性求值、Type Class 风格、表单校验、状态机建模、表达式求值器、递归 JSON、Validated、Monoid、Functor / Applicative / Monad、Reader / State，以及 IO / Resource / 并发 / 流处理直觉，并进一步过渡到最小 HTTP 服务、Tagless Final、Kleisli 请求管道、Retry / Backoff、测试解释器，最后进入真实 `cats-effect` / `fs2` / `http4s` 的高级实战阶段，并继续覆盖 `circe` JSON 编解码、http4s JSON API、http4s client、fs2 Queue 工作流、effect 的 timeout / cancel、`Ref / Deferred` 协作、Topic 发布订阅、Bearer 鉴权、Ember 本地联调、munit-cats-effect 测试化，以及 `Semaphore` 并发限流、fs2 `parEvalMap` 并行流、http4s 领域错误映射、Tagless + http4s 模块装配、路由级集成测试，并继续扩展到 `Supervisor` 后台任务托管、多路流 `merge`、官方 `AuthMiddleware`、`EitherT` 错误编排和鉴权中间件测试，随后补齐 `race` 竞速与自动取消、fs2 流式错误恢复、http4s client 中间件、下游服务聚合与编排测试，再推进到 `uncancelable` / `poll`、停流信号、client retry、`ContextRoutes` 与治理测试，并继续延伸到 `Dispatcher` 回调桥接、fs2 `groupWithin` 批处理窗口、http4s 流式响应、Ember 流式 client、流式路由测试、`IOLocal`、fs2 `Pull`、SSE、`MapRef` 分片状态、房间广播枢纽、http4s WebSocket、JDK WebSocket 回调桥接、WebSocket 路由测试，以及 Multipart 上传、fs2 固定分块处理、Doobie `Transactor` 资源、Tagless Repository + SQL 解释器与仓储集成测试，并继续推进到 Doobie 流式导出、fs2 CSV 导入管道、http4s CSV 下载接口、Tagless 批量导入模块与导入导出集成测试，以及 cats-effect 并发幂等门闩、fs2 重复请求流去重、http4s `Idempotency-Key` 写接口、Doobie 持久化幂等写入与幂等写接口集成测试，并继续延伸到 cats-effect Outbox 协调器、fs2 Outbox 重试发布流、http4s Webhook + Outbox 发布边界、Doobie 事务 Outbox 与事务 Outbox 集成测试，以及 cats-effect Inbox 协调器、fs2 Inbox 重试消费流、http4s Webhook Inbox 接收边界、Doobie 事务 Inbox 与事务 Inbox 集成测试，并继续推进到 cats-effect Saga 协调器、fs2 Saga 超时补偿流、http4s Saga 工作流边界、Doobie 事务 Saga 状态与 Saga 集成测试，以及 cats-effect 读模型投影协调器、fs2 读模型回放流、http4s 读模型查询边界、Doobie 事务投影 checkpoint 与读模型回放集成测试**，并附带了一份独立的学习路线文档 `SCALA_FP_ROADMAP.md`。
 
@@ -234,6 +234,42 @@ functioallanguagedemo01/
 │   ├── 15_mix_umbrella_releases.exs    # mix / umbrella / releases 骨架
 │   ├── run.sh                          # Elixir Demo 一键运行脚本
 │   └── ELIXIR_FP_ROADMAP.md            # Elixir FP 学习路线图
+├── ocaml/                              # ML 家族：模块系统 + Effects + 多核
+│   ├── 01_basics_and_adt/ .. 08_io_and_channels/     # ML 基础：ADT / 模式匹配 / 尾递归 / 可变引用 / IO
+│   ├── 09_modules_and_signatures/ .. 15_polymorphic_variants/  # 模块系统：signature / functor / first-class module / 多态变体
+│   ├── 16_effects_handlers/ .. 19_atomic_and_lockfree/         # OCaml 5：代数效应 / Domains 并行 / 无锁原语
+│   ├── 20_gadt_interpreter/ .. 22_typeclass_via_modules/       # 类型系统进阶：GADT / variance / 用 module 模拟 typeclass
+│   ├── 23_core_basics/ .. 30_ppx_deriving/                     # Jane Street 生态：Core / Async / bin_prot / expect_test / ppx
+│   ├── 31_mini_lang_interpreter/ .. 37_hindley_milner_inference/, 40_raytracer_multicore/  # 综合应用：解释器 / 期权定价 / 自动微分 / ETL / UTXO / FRP / HM / 多核光追
+│   ├── dune-project                    # dune 工作区入口
+│   ├── README.md                       # OCaml 子项目说明
+│   └── ROADMAP.md                      # OCaml 学习路线图
+├── clojure/                            # Lisp 家族：不可变数据 + 宏 + JVM 生态
+│   ├── 01_basics_and_collections.clj .. 06_lazy_seq_and_infinite.clj   # 基础：集合 / 不可变 / 高阶 / 解构 / recur / 惰性
+│   ├── 07_multimethods.clj .. 14_macro_hygiene.clj                     # 多方法 / 协议 / 4 种宏（入门 / anaphoric / DSL / 状态机）+ reader macro + 卫生
+│   ├── 15_atoms_and_state.clj .. 21_reducers_parallel.clj              # 并发：atom / ref+STM / agent / future / core.async / reducers
+│   ├── 22_spec_basic.clj .. 28_schema_evolution/                       # 数据契约：spec / malli / 数据导向 / EDN / Transit / schema 演化
+│   ├── 29_ring_handler/ .. 34_metabase_style_pipeline/                 # Web + 数据：Ring / Compojure / reitit / Datomic / Datalog / MBQL
+│   ├── 35_reagent_mental_model.clj .. 40_nubank_style_event_sourcing.clj  # 前端 + 业务：Reagent / re-frame / 期权 DSL / UTXO / ETL / 事件溯源
+│   ├── 41_core_async_pipeline_async/ .. 50_java_interop_advanced.clj   # 高级：async 三连（pipeline/pubsub/DLQ）/ transducer+ / spec+ / malli+ / 宏深 / Java 互操作
+│   ├── 51_ecommerce_analytics/         # 综合：电商分析平台（MBQL + DataScript + Ring + 工作池）
+│   ├── README.md                       # Clojure 子项目说明
+│   ├── ROADMAP.md                      # Clojure 学习路线图
+│   ├── CLOJURE_ECOSYSTEM.md            # Clojure 生态全景
+│   └── STAGE_*_SUMMARY.md              # 各阶段总结
+├── racket/                             # PLT 学派：Lisp 家族的"语言工作台"
+│   ├── 01_basics_and_lists/ .. 04_structs_and_match/    # Scheme 基础：cond / match / 列表 / struct
+│   ├── 05_macros_intro/ .. 06_macros_syntax_parse/, 15_macros_dsl/  # 宏三连击：syntax-rules / syntax-parse / DSL 综合
+│   ├── 07_contracts/, 08_typed_racket/                  # 渐进契约 + Typed Racket
+│   ├── 09_continuations/                                # ⭐ call/cc 第一类延续（generator / amb / 协程）
+│   ├── 10_parser_combinators/                           # 手写 parser combinator 库
+│   ├── 11_racket_lang/                                  # ⭐ #lang 自定义语言（reader + module-begin）
+│   ├── 12_web_server/                                   # 内置 web-server（8765 端口自测）
+│   ├── 13_concurrency_threads/                          # thread + channel + sync (CSP)
+│   ├── 14_property_testing/                             # 手写 mini quickcheck + rackcheck 对照
+│   ├── info.rkt / run.sh                                # 项目元信息 + 一键运行脚本
+│   ├── README.md                                        # Racket 子项目说明
+│   └── ROADMAP.md                                       # Racket 学习路线图
 ├── LANGUAGE_COMPARISON.md              # 多语言跨语言对照表
 ├── LANGUAGE_USE_CASES.md               # 四种语言应用场景与 Demo 索引
 └── README.md
@@ -242,6 +278,8 @@ functioallanguagedemo01/
 ---
 
 ## 🎯 核心概念一览
+
+> 下表覆盖 5 门主力对照（Scala / Erlang / Elixir / Haskell / Rust）。**OCaml 与 Clojure 的同样思想跨语言对照**已在 [`LANGUAGE_COMPARISON.md`](./LANGUAGE_COMPARISON.md) 给出 7 列完整版（含 OCaml 列与 Clojure 列），本表不重复维护以避免漂移。
 
 | 函数式概念 | Scala | Erlang | Elixir | Haskell | Rust | 简要说明 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---|
@@ -1802,6 +1840,176 @@ Elixir 和 Erlang 共享同一套 BEAM 运行时，`.beam` 文件 100% 互通，
 
 ---
 
+### 🐫 OCaml — ML 家族里的工业派
+
+OCaml 与 Haskell 同属 ML 家族，但走"不纯 + 模块系统优先 + 极快编译"路线，是 Jane Street、Facebook Flow、早期 rustc、Coq 等工业级项目的母语。当前这组 38 个 demo（编号 01~37 + 40，全部 `<编号>_<名>/main.ml + dune` 子目录形式，由根目录 `dune-project` 统一管理）覆盖**ML 基础语法 → 模块系统与 functor → OCaml 5 一等代数效应 + Domain 多核 → GADT 与类型进阶 → Jane Street Core/Async 工业生态 → 综合应用（解释器 / 期权 / AD / UTXO / FRP / HM / 多核光追）**。详细路线图见 [`ocaml/ROADMAP.md`](./ocaml/ROADMAP.md)，子项目说明见 [`ocaml/README.md`](./ocaml/README.md)。
+
+#### 🌱 ML 基础（demo 01~08，零依赖）
+- `01_basics_and_adt`：基础语法 + 代数数据类型（`type t = A | B of int`）
+- `02_pattern_matching`：模式匹配（含 OR-pattern / guard / exception 模式）
+- `03_higher_order_and_currying`：高阶函数 + 原生柯里化 + 函数组合（`@@` / `|>`）
+- `04_variants_and_records`：变体 + 记录 + 可变字段
+- `05_exceptions_vs_result`：异常 vs `('a, 'e) result`，Janestreet 风格的 `Or_error.t`
+- `06_tail_recursion`：尾递归 + `[@tail_mod_cons]`（让 cons 也能尾调）
+- `07_mutable_refs_and_arrays`：`ref` / `mutable` / `Array.t` —— 不强制纯，务实可变
+- `08_io_and_channels`：IO 通道（`in_channel` / `out_channel`）
+
+#### 🏛 模块系统（demo 09~15，OCaml 灵魂）
+- `09_modules_and_signatures`：`.ml` + `.mli` 信息隐藏；module type 做契约
+- `10_functors_basic`：functor 入门（Set 风格的参数化模块）
+- `11_functors_advanced`：functor 进阶（多参 + 共享约束 `with type`）
+- `12_first_class_modules`：一等模块（运行时把 module 当值传）
+- `13_abstract_types`：抽象类型 + 信息隐藏（type-safe ID）
+- `14_include_and_extension`：`include` 与模块扩展
+- `15_polymorphic_variants`：多态变体 `` [`Foo | `Bar] `` —— 比闭合 variant 更灵活
+
+#### ⚡ OCaml 5 现代特性（demo 16~19、40，需 OCaml ≥ 5.0）
+- `16_effects_handlers`：⭐ **一等代数效应 + handler**（`effect E : ... with handler`），让 monad transformer 栈变得多余
+- `17_effects_as_generators`：用 effect 实现 generator（无需特殊语法）
+- `18_domains_parallel`：`Domain.spawn` 多核并行 —— 真正打破 GIL
+- `19_atomic_and_lockfree`：`Atomic.t` 无锁原语 + CAS-on-Atomic 乐观并发
+- `40_raytracer_multicore`：综合实战 —— Domain 并行光线追踪（含工业级并行计算心智）
+
+#### 🧬 类型系统进阶（demo 20~22）
+- `20_gadt_interpreter`：GADT 类型安全解释器 —— OCaml 用 GADT 取代 Haskell DataKinds
+- `21_polymorphism_and_variance`：参数多态 + 协变/逆变
+- `22_typeclass_via_modules`：⭐ **用 module type + functor 模拟 type class** —— OCaml 与 Haskell 抽象层最大的分岔
+
+#### 🏦 Jane Street 工业生态（demo 23~30，需 `opam install core core_unix async ppx_jane bin_prot incremental`）
+- `23_core_basics`：Jane Street Core 入门（`List.t` / `Map.t` / `Or_error.t`）
+- `24_async_basics`：Async 异步（`Deferred.t`，Lwt 的 JS 版）
+- `25_async_rpc`：Async RPC server / client
+- `26_bin_prot_serialization`：bin_prot 二进制序列化（金融场景对标 Protobuf）
+- `27_incremental_compute`：incremental 增量计算（电子表格风格依赖追踪）
+- `28_command_line`：`Command_unix` CLI 框架（Jane Street 内部 1500+ 工程师标配）
+- `29_expect_tests`：`ppx_expect` 快照测试（`dune runtest`，不是 `dune exec`）
+- `30_ppx_deriving`：`ppx_jane` 派生宏（`[@@deriving show, eq, sexp]`）
+
+#### 🛠 综合应用（demo 31~37）
+- `31_mini_lang_interpreter`：迷你语言解释器（lexer + parser + eval）
+- `32_option_pricing_dsl`：⭐ 期权定价 DSL（Tagless Final 风格，对标 Standard Chartered/Jane Street）
+- `33_ad_autodiff`：自动微分（forward + reverse mode，PyTorch/JAX 底层原理）
+- `34_etl_pipeline`：CSV→JSON ETL 流水线 + 列类型推导
+- `35_utxo_ledger`：UTXO 账本（Cardano / Plutus 风格 + Merkle 根）
+- `36_frp_minimal`：极简 FRP（Behavior + Event，对标 Reflex / Yampa）
+- `37_hindley_milner_inference`：⭐ Hindley-Milner 类型推导（OCaml 主场，从零实现 Algorithm W）
+
+> **运行**：`cd ocaml && ./run.sh list` 看全部索引；`./run.sh 16` 跑单个；`./run.sh ocaml5` 跑 OCaml 5 组；`./run.sh deps` 跑 Jane Street 依赖组。
+
+---
+
+### 🍃 Clojure — Lisp 家族在 JVM 上的复兴
+
+Clojure 是 Rich Hickey 设计的"Lisp 方言 + JVM 平台 + persistent 数据结构 + STM 一等公民 + 真正 Lisp 宏 + REPL-driven 工作流"组合，哲学是「Simple Made Easy」—— 把状态、身份、时间分开。是 Metabase（开源 BI）、Datomic（不可变数据库）、Nubank（巴西最大数字银行）、LogSeq（知识图谱）等工业项目的母语。当前这组 51 个 demo + 1 个完整电商分析项目，覆盖**基础语法 → 不可变与高阶 → 多方法/协议/记录 → 6 种宏（入门/anaphoric/DSL/状态机/reader/卫生）→ 6 种并发原语（atom/ref+STM/agent/future/core.async/reducers）→ 数据契约（spec/malli/EDN/Transit）→ Web（Ring/Compojure/Reitit）→ 数据库（Datomic/Datalog/MBQL）→ 前端（Reagent/re-frame）→ 综合实战（期权 DSL/UTXO/Nubank 事件溯源）→ 高级 async + transducers + spec/malli + 宏深度 + Java 互操作**。详细路线图见 [`clojure/ROADMAP.md`](./clojure/ROADMAP.md)，分阶段总结见 `clojure/STAGE_*_SUMMARY.md`。
+
+#### 🌱 基础与不可变（demo 01~06，零依赖）
+- `01_basics_and_collections`：基础语法 + 集合字面量（vector / list / map / set）
+- `02_immutable_data_structures`：⭐ **persistent vector / hash-map**，O(log32 N) 结构共享更新
+- `03_higher_order_and_transducers`：⭐ **transducers** —— 与数据源解耦的高性能管道
+- `04_destructuring`：解构（vector / map / seq）+ `:as` / `:keys` / `:or`
+- `05_recur_and_loop`：`recur` / `loop` —— 显式必用尾递归（不是优化，是语法）
+- `06_lazy_seq_and_infinite`：`lazy-seq` + 无穷序列 `(iterate f x)` / `(repeat)` / `(cycle)`
+
+#### 🔀 多态：multimethod / protocol / record（demo 07~08）
+- `07_multimethods`：`defmulti` + `defmethod` —— 开放分派（多 dispatch）
+- `08_protocols_and_records`：`defprotocol` + `defrecord` —— JVM 友好的协议（运行时 type class）
+
+#### 🪄 宏与元编程（demo 09~14）
+- `09_macros_intro`：宏入门 `quote` / `unquote` / `syntax-quote` / gensym
+- `10_macros_anaphoric`：捕获式宏（`it` / `?>`）
+- `11_macros_dsl`：⭐ 用宏写 DSL（同象性是 Lisp 杀手锏）
+- `12_macros_state_machine`：宏写状态机（编译期生成 multimethod 分派）
+- `13_reader_macros`：reader 宏 `#()` / `#_` / `#'` / `#?`
+- `14_macro_hygiene`：宏卫生 + `gensym` 自动避免变量捕获
+
+#### ⚙️ 并发原语六件套（demo 15~21）
+- `15_atoms_and_state`：⭐ **`atom` + `swap!` + watcher** —— 单内存格的 CAS
+- `16_refs_and_stm`：⭐ **`ref` + `dosync` STM 转账守恒** —— 一等公民事务，对标 Haskell H-06
+- `17_agents_async`：`agent` + `send` —— 异步串行化状态修改
+- `18_futures_and_delay`：`future` / `delay` / `promise`
+- `19_core_async_channels`：⭐ **CSP 风格 chan / go / <! / >!**（子目录 + deps.edn）
+- `20_core_async_pipeline`：core.async pipeline 保序
+- `21_reducers_parallel`：reducers 并行 fork-join
+
+#### 📐 数据契约与序列化（demo 22~28）
+- `22_spec_basic`：`clojure.spec.alpha` 入门（运行期类型）
+- `23_spec_generators`：spec + test.check 自动派生 generator
+- `24_malli_schema`：⭐ `metosin/malli` —— 数据驱动的 schema（比 spec 更工业化）
+- `25_data_oriented_programming`：数据驱动编程（Rich Hickey 风格）
+- `26_edn_format`：edn 数据格式
+- `27_transit_format`：Transit 二进制 edn
+- `28_schema_evolution`：schema 演进（向前/向后兼容）
+
+#### 🌐 Web 与数据库（demo 29~34）
+- `29_ring_handler`：Ring handler 入门（`fn req -> resp`）
+- `30_compojure_router`：Compojure 路由
+- `31_reitit_data_router`：⭐ Reitit 数据驱动路由
+- `32_datomic_mini`：Datomic 入门（in-memory）—— Rich Hickey 自己写的不可变数据库
+- `33_datalog_query`：Datalog 查询语言
+- `34_metabase_style_pipeline`：⭐ Metabase 风格 MBQL 分析管道
+
+#### 🎨 前端与综合实战（demo 35~40）
+- `35_reagent_mental_model`：Reagent（React 包装）心智模型
+- `36_re_frame_event_loop`：re-frame 事件循环
+- `37_option_pricing_dsl`：期权定价 DSL（与 OCaml 32 形成同一思想跨语言对照）
+- `38_utxo_ledger`：UTXO 账本（与 OCaml 35 形成 Cardano 风格对照）
+- `39_csv_to_json_etl`：CSV→JSON ETL（与 OCaml 34 形成对照）
+- `40_nubank_style_event_sourcing`：⭐ **Nubank 风格事件溯源** —— 巴西最大数字银行的核心范式
+
+#### 🚀 高级专题（demo 41~50）
+- `41_core_async_pipeline_async`：⭐ pipeline-async 保序异步
+- `42_core_async_pubsub_mix`：core.async pub/sub + mix
+- `43_core_async_error_dlq`：core.async 错误 DLQ 模式
+- `44_transducers_advanced`：transducers 进阶（自定义 reducing function）
+- `45_spec_advanced`：spec 进阶（fdef + instrument）
+- `46_malli_advanced`：malli 进阶（registry + transformer）
+- `47_macros_deep`：⭐ 宏深度（`with-meta` / `&form` / `&env`）
+- `48_metadata_protocols`：元数据 + 协议组合
+- `49_reducers_fold`：reducers fold + `r/foldcat` —— Java fork-join 池
+- `50_java_interop_advanced`：Java interop 进阶（`gen-class` / proxy / reify）
+
+#### 🏪 完整项目（demo 51）
+- `51_ecommerce_analytics`：⭐ **电商实时分析平台** —— MBQL + DataScript + Ring + 工作池 + DLQ + 测试套件，对标 Metabase / Nubank 工业风格。运行用 `cd 51_ecommerce_analytics && ./demo.sh`。
+
+> **运行**：`cd clojure && ./run.sh list` 看全部索引；`./run.sh 16` 跑 STM 转账守恒；`./run.sh deps` 跑子目录依赖组（首次拉 maven 包）。
+
+---
+
+### 🎩 Racket — Lisp 家族的"语言工作台"派
+
+Racket 是 PLT 团队从 PLT-Scheme 重命名而来的现代 Scheme 方言，但它远不止是一个 Lisp 实现 —— **它把"创造编程语言"做成了一等公民**。每个 `.rkt` 文件可以指定自己的 `#lang`，从教学语言（HtDP）到 Typed Racket、Lazy Racket、Pollen 出版语言、Scribble 文档语言，都生活在同一套工具链里。当前这组 15 个 demo 覆盖**Scheme 基础 → 宏三连击（syntax-rules / syntax-parse / DSL）→ 契约 + Typed Racket 渐进类型 → call/cc 第一类延续 → parser combinators → 自定义 #lang → web-server → CSP 风格并发 → property testing**。详细路线图见 [`racket/ROADMAP.md`](./racket/ROADMAP.md)。
+
+#### 🌱 Scheme 基础（demo 01~04）
+- `01_basics_and_lists`：基础语法 + cond/case/match + 列表三剑客 + 4 种 let
+- `02_higher_order`：高阶函数 + 闭包工厂 + compose + curry/curryr + apply
+- `03_recursion_and_tail`：⭐ 真尾递归（语言层保证）+ named let + for/list / for/sum / for/fold
+- `04_structs_and_match`：struct + match 做 ADT（表达式树 / 形状 / 二叉树）
+
+#### 🪄 宏三连击（demo 05、06、15）
+- `05_macros_intro`：`syntax-rules` 入门（unless / my-and 短路 / swap! 卫生 / while / debug-print）
+- `06_macros_syntax_parse`：⭐ `syntax-parse` 工业级（自定义 syntax class / 关键字参数 / 精确错误消息 / defmemo）
+- `15_macros_dsl`：⭐ 综合实战 —— 用宏写状态机 DSL（红绿灯 / 门锁），与 Clojure 12 形成 Lisp 双线对照
+
+#### 🛡 契约与类型（demo 07、08）
+- `07_contracts`：⭐ 一等公民契约系统（`-> / ->* / ->i` + flat-contract + blame 责任追踪）
+- `08_typed_racket`：⭐ Typed Racket 渐进类型（occurrence typing / All / Listof / Pair，与无类型代码可互操作）
+
+#### 🌀 第一类延续（demo 09）
+- `09_continuations`：⭐ `call/cc` 三大经典应用 —— early return + generator + amb 非确定性 + 协程 ping-pong。这一个 demo 顶 SICP 第 4 章
+
+#### 🏗 工程化标准库（demo 10、12、13、14）
+- `10_parser_combinators`：从零实现 mini parser combinator 库 + 算术表达式解析
+- `12_web_server`：内置 web-server + dispatch-rules（在 8765 端口起 HTTP 服务并自测）
+- `13_concurrency_threads`：thread + channel + sync + worker pool（CSP 风格，与 Clojure 19 core.async 对照）
+- `14_property_testing`：手写 mini quickcheck（80 行）+ rackcheck 对照（自动检测是否安装）
+
+#### 🎨 语言工作台（demo 11）
+- `11_racket_lang`：⭐ `#lang` 自定义语言示意 —— reader 拦截 + RPN 求值器，并讲解如何打包成真正的 `#lang my-lang`。这是 Clojure / OCaml / Haskell 都做不到的事
+
+> **运行**：`cd racket && ./run.sh list` 看全部索引；`./run.sh 9` 跑 call/cc 经典 demo；`./run.sh all` 跑全部 15 个。
+
+---
+
 ## 🚀 运行方式
 
 ### Scala
@@ -2025,6 +2233,67 @@ elixir 14_exunit_doctest_mox_streamdata.exs
 elixir 15_mix_umbrella_releases.exs
 ```
 
+### OCaml
+```bash
+# 需要安装 OCaml + opam + dune（建议 OCaml 5.0+；macOS: brew install opam）
+# opam init -y && opam switch create 5.1.1 && eval $(opam env)
+# opam install -y dune
+cd ocaml
+
+# 一键运行脚本（封装了零依赖组 / OCaml 5 组 / 依赖组 / 全量四种模式）
+./run.sh           # 只跑零依赖组 01~22（仅需 stdlib + dune）
+./run.sh 16        # 只跑编号 16（16_effects_handlers）
+./run.sh ocaml5    # 只跑 OCaml 5 专属组（16~19、40，需 OCaml ≥ 5.0）
+./run.sh deps      # 只跑依赖组 23~37（首次需 opam install core core_unix async ppx_jane bin_prot incremental）
+./run.sh all       # 一次跑完全部
+./run.sh list      # 仅列出全部 demo 索引
+
+# 也可以直接用 dune
+dune exec 01_basics_and_adt/main.exe
+dune exec 16_effects_handlers/main.exe
+dune runtest 29_expect_tests           # ppx_expect demo 用 runtest，不是 exec
+```
+
+### Clojure
+```bash
+# 需要安装 JDK ≥ 11 与 Clojure CLI（macOS: brew install clojure/tools/clojure）
+cd clojure
+
+# 一键运行脚本（封装了零依赖组 / 中间组 / 依赖组 / 全量四种模式）
+./run.sh           # 只跑零依赖组 01~18（单文件，仅需 clojure.core）
+./run.sh 16        # 只跑编号 16（16_refs_and_stm，STM 转账守恒）
+./run.sh mid       # 只跑中间组（21、22、25、26、35~38、40、44、47~50，单文件无 maven 依赖）
+./run.sh deps      # 只跑依赖组（19/20/23/24/27~34/39/41~46，子目录 + deps.edn，首次会拉 maven 包）
+./run.sh all       # 一次跑完全部（51 号完整电商项目除外）
+./run.sh list      # 仅列出全部 demo 索引
+
+# 51 号是完整的电商分析平台（MBQL + DataScript + Ring + 工作池），用它自己的脚本：
+cd 51_ecommerce_analytics && ./demo.sh
+
+# 也可以手动跑单个 demo
+clojure -M 01_basics_and_collections.clj           # 单文件
+(cd 24_malli_schema && clojure -M demo24.clj)      # 子目录形式
+```
+
+### Racket
+```bash
+# 需要安装 Racket >= 8.0（macOS: brew install --cask racket）
+cd racket
+
+# 一键运行脚本
+./run.sh           # 跑全部 15 个 demo
+./run.sh 9         # 只跑编号 09（call/cc 第一类延续）
+./run.sh list      # 列出全部 demo
+
+# 也可以手动跑
+racket 01_basics_and_lists/main.rkt
+racket 09_continuations/main.rkt
+racket 12_web_server/main.rkt           # 在 8765 端口短暂启 HTTP 服务并自测
+
+# demo 14 的 rackcheck 部分（可选）
+raco pkg install rackcheck
+```
+
 ---
 
 ## 🧭 推荐学习路径
@@ -2163,7 +2432,57 @@ elixir 15_mix_umbrella_releases.exs
    这三步合起来差不多就覆盖了 Elixir 最独特的心智模型：
      管道 / with 写业务 × OTP 行为抽象 × 监督树可靠性
 
-🔚 后续扩展: 查看 `scala/SCALA_FP_ROADMAP.md` 与 `elixir/ELIXIR_FP_ROADMAP.md`
+3️⃣2️⃣ ML 家族工业派：用 OCaml 看 Haskell 思想如何工业化（建议顺序 09 → 22 → 16/17 → 28/30 → 40）
+   OCaml 09 (Modules & Signatures)
+     → 看 ML 模块系统：以 .mli 签名做信息隐藏、以 module type 做契约
+       这是 OCaml 与 Haskell 在抽象层最大的分岔（Haskell 用 type class，OCaml 用 module）
+   OCaml 22 (Typeclass via Modules)
+     → 看 functor + first-class modules 如何在不引入 type class 的前提下完成等价表达力
+       理解 ML 派"显式 over 隐式"的工程哲学
+   OCaml 16 / 17 (Algebraic Effects)
+     → 看 OCaml 5 一等代数效应如何让 monad transformer 栈变得多余
+       同一段业务，用 effect handler 在不同上下文里换语义（对标 Haskell 21 EffectSystem）
+   OCaml 28 / 30 (Jane Street Core / ppx_jane)
+     → 看真正在金融工业界用的 OCaml 是什么样：Command_unix CLI、ppx_jane 派生宏、
+       Async + Throttle 这些组合解决真实问题
+   OCaml 40 (Domain 多核光追)
+     → 看 OCaml 5 Domain 如何把"声明式描述 + 多核执行"两件事拆开
+
+3️⃣3️⃣ 动态 Lisp 派：用 Clojure 体会"数据是一等公民"哲学（建议顺序 02/03 → 11 → 16 → 19/41 → 22/24 → 40）
+   Clojure 02 / 03 (persistent data + transducers)
+     → 看 persistent vector / hash-map 如何让"不可变"既高效又自然
+       transducers 是与数据源解耦的高性能管道（与 Haskell 列表懒求值、Scala fs2 形成三足鼎立）
+   Clojure 11 (Macros DSL)
+     → 看 Lisp 同象性带来的真宏：把代码当数据，写 DSL 不需要新文法
+   Clojure 16 (refs + STM 转账守恒)
+     → 看 STM 一等公民：dosync / alter / commute / ensure 在转账场景里如何守恒
+       这是 Clojure 最独特的并发抽象（对标 Haskell 06 ConcurrencySTM）
+   Clojure 19 / 41 (core.async + pipeline-async)
+     → 看 CSP 风格 chan/go：Clojure 不走 Actor 走 CSP，与 Erlang/Elixir 形成另一极对照
+   Clojure 22 / 24 (spec / malli)
+     → 看动态 Lisp 怎么补类型：把类型检查放到运行期 + 自动派生测试用例 generator
+   Clojure 40 (Nubank 风格事件溯源)
+     → 看金融工业界（Nubank / Datomic）用 Clojure 做事件溯源的实战范式
+
+3️⃣4️⃣ PLT 学派"语言工作台"：用 Racket 体会 Lisp 另一面（建议顺序 09 → 06/15 → 11 → 07/08 → 13）
+   Racket 09 (call/cc 第一类延续)
+     → 看一行 (call/cc proc) 如何同时实现 generator / amb / 协程
+       这是 Scheme/Racket 独有的"另一种 FP"（OCaml/Haskell 都需要 monad 模拟）
+   Racket 06 / 15 (syntax-parse + 状态机 DSL)
+     → 看工业级宏框架：自定义 syntax class、精确错误消息、把 DSL 编译成普通函数
+       与 Clojure 的"宏"形成 Lisp 双线对照（Clojure 实用主义 vs Racket 学术派）
+   Racket 11 (#lang 自定义语言)
+     → 看 Racket 的杀手锏：每个 .rkt 文件可以指定自己的 #lang
+       Pollen / Scribble / HtDP / Pie 都是用同一机制实现的不同语言
+       这是 Clojure / OCaml / Haskell 都做不到的事
+   Racket 07 / 08 (contract + Typed Racket)
+     → 看动态契约（运行期）+ 渐进类型（编译期）如何在同一语言里和谐共存
+       Typed Racket 的 occurrence typing 来自 Tobin-Hochstadt 2010 的 PhD 论文
+   Racket 13 (thread + channel + sync)
+     → CSP 风格并发，与 Clojure 19 core.async 几乎一一对应
+       但 sync 是一等公民值（可装数据结构、传函数），这是 Go 的 select 也做不到的
+
+🔚 后续扩展: 查看 `scala/SCALA_FP_ROADMAP.md`、`elixir/ELIXIR_FP_ROADMAP.md`、`ocaml/ROADMAP.md`、`clojure/ROADMAP.md`、`racket/ROADMAP.md`
    继续从真实库入门走向更完整的函数式服务、测试与架构拆分
 ```
 

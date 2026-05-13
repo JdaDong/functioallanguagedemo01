@@ -1,6 +1,6 @@
 # 其他常用函数式编程语言盘点
 
-> 本仓库当前主力覆盖 6 门：Haskell / Scala / Rust / Erlang / Elixir / （规划中）OCaml、Clojure。
+> 本仓库当前主力覆盖 7 门：Haskell / Scala / Rust / Erlang / Elixir / OCaml / Clojure。
 > 本文用来**归档剩余值得认识的函数式语言**，防止口径散落在历次对话里。
 > 原则：只收录有**真实工业落地**或**被大厂/顶级开源项目当作主力语言**的函数式/多范式 FP 友好语言。
 
@@ -11,7 +11,7 @@
 | 语言 | 本仓库状态 | 一句话 |
 |---|---|---|
 | Haskell | ✅ 48 demo + roadmap + 生态盘点 | 学术 & 工业两开花，类型系统最强 |
-| OCaml | 📋 `ocaml/ROADMAP.md`（规划中） | Jane Street / Facebook Flow / Rust 编译器雏形 |
+| OCaml | ✅ 38 demo + roadmap + README（已完成主线） | Jane Street / Facebook Flow / Rust 编译器雏形 |
 | F# | ⏳ 待补 | .NET 上的 OCaml 方言，金融、博弈论工业首选之一 |
 
 ---
@@ -20,7 +20,7 @@
 
 | 语言 | 本仓库状态 | 一句话 | 代表项目 |
 |---|---|---|---|
-| Clojure | 📋 `clojure/ROADMAP.md`（规划中） | JVM 上的 Lisp，持久化数据结构 + 宏 + STM | Metabase / Datomic / LogSeq |
+| Clojure | ✅ 51 demo + 7 阶段总结 + 回归报告 | JVM 上的 Lisp，持久化数据结构 + 宏 + STM | Metabase / Datomic / LogSeq |
 | Racket | ⏳ 待补 | 教学/研究用 Scheme 超集，内置语言工作台 | Racket Pollen、Nanopass 编译器 |
 | Common Lisp | ⏳ 待补 | 古老但至今仍被 Grammarly / 商用 CAD 使用 | SBCL、CLOS |
 | Scheme / Guile | ⏳ 待补 | MIT 6.001 文化遗产；Guile 是 GNU 扩展脚本 | SICP / GnuCash |
@@ -64,23 +64,26 @@
 
 ---
 
-## 📊 与本仓库 6 门主力的对比定位
+## 📊 与本仓库 7 门主力的对比定位
 
 | 你已经在本仓库学过 | 想进一步看哪一门 | 理由 |
 |---|---|---|
 | Haskell | Idris / Agda / Lean | 把类型系统从工业级推到证明级 |
 | Haskell | PureScript / Elm | 想把 FP 带到前端 |
-| Scala | F# / OCaml | 想脱离 JVM 但保留 ML 家族思维 |
+| Scala | F# | 想脱离 JVM 但保留 ML 家族思维（OCaml 已在本仓库）|
+| OCaml | F# / ReScript | ML 家族跨生态（.NET / JS）|
+| Clojure | Racket / Common Lisp | Lisp 家族上溯，看看宏与语言工作台 |
+| Clojure | ClojureScript | 同一套思维迁移到前端 |
 | Erlang | Gleam | BEAM + 静态类型 |
 | Elixir | Gleam / Unison | 分布式 FP 的下一代尝试 |
-| Rust | Roc / Koka | 想看"FP 原教旨但编译到原生" |
+| Rust | Roc / Koka | 想看“FP 原教旨但编译到原生” |
 
 ---
 
 ## 🗂 本仓库对这些语言的覆盖计划
 
-- **OCaml**：✅ 已排期，见 [`ocaml/ROADMAP.md`](./ocaml/ROADMAP.md)
-- **Clojure**：✅ 已排期，见 [`clojure/ROADMAP.md`](./clojure/ROADMAP.md)
+- **OCaml**：✅ 已完成主线（38 demo），见 [`ocaml/ROADMAP.md`](./ocaml/ROADMAP.md) 与 [`ocaml/README.md`](./ocaml/README.md)
+- **Clojure**：✅ 已完成（51 demo + 7 份阶段总结 + 回归报告），见 [`clojure/ROADMAP.md`](./clojure/ROADMAP.md)
 - **其他语言**：暂不排期。若未来需要，按本文梯队优先级（F# → Elm → Racket → Gleam → Lean）增补。
 
 ---
